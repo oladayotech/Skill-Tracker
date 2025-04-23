@@ -14,14 +14,16 @@
             <div class="col-lg-6 col-md-7 col-sm-12 mb-4 mb-md-0 ">
                 <h1 class="text-primary"> Sign UP</h1>
                 <form class="" action="" method="post">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" placeholder="John Doe">
+                    <p>{{ error_message }}</p>
+                    {% csrf_token %}
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" placeholder="Johndoe1890">
                     <label for="name">Email</label>
                     <input type="email" name="email" id="email" placeholder="johndoe@gmail.com">
                     <label for="name">Password</label>
-                    <input type="password" name="password1" id="password1">
+                    <input type="password" name="password" id="password">
                     <label for="name">Confirm Password</label>
-                    <input type="password" name="password2" id="password2">
+                    <input type="password" name="password1" id="password1">
                     <button class="btn btn-primary p-2" type="submit">Sign UP</button>
                     <p>Already have an account <a href="{% url 'login' %}">Log in</a></p>
                 </form>

@@ -3,6 +3,7 @@
 .body {
     /* background-color: #F5F5F5; or whatever color you picked */
     background-color: #102ea8;
+    /* background-color: blue; */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white; /* default text color */
     margin: 0;
@@ -49,9 +50,10 @@ footer {
     width: 100%;
     text-align: center;
     font-size: 14px;
-    /* color: #94a3b8; */
+    color: white;
 }
 footer a{
     text-decoration: none;
     margin-left: 10px;
+    color: white;
 }
