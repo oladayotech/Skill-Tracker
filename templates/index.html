@@ -10,29 +10,34 @@
     <title>Skill Tracker</title>
 </head>
 <body class="body">
-    <nav>
+    <nav class="p-4 align-middle mb-5">
         <div style="display: flex; align-items: center;">
             <img style="padding: 5px; border-radius: 10px;" src="{% static 'images\ChatGPT Image Apr 22, 2025, 07_31_14 PM1.png' %}" width="50px" height="50px" alt="">
             <h2 class="nav-h2">Skill Tracker</h2>
         </div>
-        <div class="nav-link">
-            <a href="{% url 'login' %}"><h3>Login</h3></a>
-            <a href="{% url 'signup' %}"><h3>Sign Up</h3></a>
+        <div class="nav-link d-flex flex-row-reverse justify-content-end">
+            <a href="{% url 'signup' %}"><h4>Sign Up</h4></a>
+            <a href="{% url 'login' %}"><h4>Login</h4></a>
         </div>
     </nav>
 
     <div class="container">
         <div class="row">
-            <div class="col-6">
-                <h2 class="text-white text-bold">Track Your Growth. Own Your Journey.</h2>
-                <button class="btn btn-primary" type="submit" onclick="">Get Started</button>
+            <div class="col-6 mr-4">
+                <h2 class="text-white text-bold text-large">Track Your Growth. Own Your Journey.</h2>
+                <button class="btn btn-primary p-2" type="submit" onclick="window.location.href='dashboard'">Get Started</button>
             </div>
-            <div class="col-6 mt-10">
-                <img src="{% static 'images\ChatGPT Image Apr 22, 2025, 07_31_14 PM.png' %}" width="300px" alt="">
+            <div class="col-6">
+                <img src="{% static 'images\ChatGPT Image Apr 22, 2025, 07_31_14 PM.png' %}" width="350px" alt="">
             </div>
         </div>
     </div>
 
-    <footer class="text-white ">&copy;right <a href="https://github.com/oladayotech"> Oladayo</a></footer>
+    <footer>
+        &copy; 2025 Built with 💙 by Abdulquahaar |
+        <a href="#">Privacy</a> |
+        <a href="https://github.com/oladayotech">Contact</a>
+      </footer>
+    <!-- <footer class="text-white ">&copy;right <a href="https://github.com/oladayotech"> Oladayo</a></footer> -->
 </body>
 </html>
