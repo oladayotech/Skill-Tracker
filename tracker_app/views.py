@@ -47,7 +47,15 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    redirect('dashboard')
+    redirect('login')
 
+@login_required
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    context = request.user.username
+    return render(request, 'dashboard.html', {'context':context})
+
+def about(request):
+    return render(request, 'about.html')
+
+def journal(request):
+    return render(request, 'journal.html')
