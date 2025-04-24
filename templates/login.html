@@ -14,6 +14,8 @@
             <div class="col-lg-6 col-md-7 col-sm-12 mb-4 mb-md-0 ">
                 <h1 class="text-primary">Login</h1>
                 <form class="p-2" action="" method="post">
+                    {{ error_message }}
+                    {% csrf_token %}
                     <label for="username">Username</label>
                     <input type="text" name="username" id="username" placeholder="johndoe1870">
                     <label for="name">Password</label>

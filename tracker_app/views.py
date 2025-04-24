@@ -40,6 +40,9 @@ def user_login(request):
         if user is not None:
             login(request, user)
             return redirect('dashboard')
+        else:
+            error_message = 'Invalid username or password'
+            return render(request, 'login.html', {"error_message":error_message})
     return render(request, 'login.html')
 
 def user_logout(request):
