@@ -5,9 +5,15 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
+    # Check if the user is already authenticated
+    if request.user.is_authenticated:
+        return redirect('dashboard')  # Redirect to the dashboard if already logged in
     return render(request, 'index.html')
 
 def user_signup(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')  # Redirect to the dashboard if already logged in
+    
     if request.method == 'POST':
         username = request.POST['username']
         email = request.POST['email']
@@ -32,6 +38,9 @@ def user_signup(request):
     return render(request, 'signup.html')
 
 def user_login(request):
+    # Check if the user is already authenticated
+    if request.user.is_authenticated:
+        return redirect('dashboard')  # Redirect to the dashboard if already logged in
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -47,7 +56,7 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    redirect('login')
+    return redirect('login')
 
 @login_required
 def dashboard(request):

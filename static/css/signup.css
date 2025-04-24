@@ -5,9 +5,9 @@ h1 {
 
 .body {
     /* background-color: #F5F5F5; or whatever color you picked */
-    /* background-color: #102ea8; */
+    background-color: #102ea8;
     /* background-color: blue; */
-    background-color: #f8f9fa;
+    /* background-color: #f8f9fa; */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white; /* default text color */
     margin: 0;
