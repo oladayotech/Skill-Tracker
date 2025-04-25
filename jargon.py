@@ -9,14 +9,14 @@ target = 10
 
 
 def loop(array):
-    length =  len(array)
-    try:
-        for i in range(length):
-            for arr1 in range(0, length):
-                if array1[i] + array1[arr1] == target:
-                    return i, arr1
-    except Exception as e:
-        print(e)
+#     length =  len(array)
+#     try:
+#         for i in range(length):
+#             for arr1 in range(0, length):
+#                 if array1[i] + array1[arr1] == target:
+#                     return i, arr1
+#     except Exception as e:
+#         print(e)
         
-loop(array1)
+# loop(array1)
         
