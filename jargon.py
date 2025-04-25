@@ -8,7 +8,7 @@ target = 10
 #             print(arr1,arr2)
 
 
-def loop(array):
+# def loop(array):
 #     length =  len(array)
 #     try:
 #         for i in range(length):
