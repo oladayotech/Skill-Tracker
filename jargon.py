@@ -1,6 +1,6 @@
 array1 = [3,4,2,4,6]
 target = 10
-# array2 = [8,4,6,7,8]
+array2 = [8,4,6,7,8]
 
 # def loop():
 #     for arr1 in array1:
@@ -19,4 +19,9 @@ target = 10
 #         print(e)
         
 # loop(array1)
-        
+def concate():
+    # array3 = 
+    
+    print(array3)
+
+concat()
