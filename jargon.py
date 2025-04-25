@@ -20,9 +20,9 @@ array2 = [8,4,6,7,8]
         
 # loop(array1)
 
-def concate():
+# def concate():
     # array3 = 
-    
+    # 
     print(array3)
 
 concat()
