@@ -23,6 +23,4 @@ array2 = [8,4,6,7,8]
 # def concate():
     # array3 = 
     # 
-    print(array3)
-
-concat()
+/
