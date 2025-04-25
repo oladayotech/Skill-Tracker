@@ -10,16 +10,8 @@
 </head>
 <body class="body">
 
-    <nav class="d-flex justify-content-between align-items-center px-4 py-3 mb-3">
-        <div class="d-flex align-items-center">
-            <img src="{% static 'images/ChatGPT Image Apr 22, 2025, 07_31_14 PM1.png' %}" class="logo me-3" alt="Logo">
-            <h2 class="nav-h2">Skill Tracker</h2>
-        </div>
-        <div class="nav-link d-flex gap-3">
-            <a href="{% url 'about' %}"><h5>About Us</h5></a>
-            <a href="{% url 'logout' %}"><h5>Logout</h5></a>
-        </div>
-    </nav>
+    <!-- templates/partials/navbar.html -->
+    {% include 'navbar.html' %}
 
     <!-- Hero Section with Background Image -->
     <!-- Hero Section with Background Image and Typewriter -->

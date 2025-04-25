@@ -1,0 +1,36 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/navbar4.css' %}">
+
+<nav class="navbar px-4 py-3 mb-3 d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center">
+        <img src="{% static 'images/ChatGPT Image Apr 22, 2025, 07_31_14 PM1.png' %}" class="logo me-3" alt="Logo">
+        <h2 class="nav-h2">Skill Tracker</h2>
+    </div>
+
+    <div class="d-flex align-items-center gap-4 ms-auto">
+        <div class="form-check form-switch me-3">
+            <input class="form-check-input" type="checkbox" id="darkModeToggle">
+        </div>
+
+        <div class="hamburger d-lg-none" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
+
+<div class="hamburger-menu" id="hamburgerMenu">
+    <ul>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'dashboard' %}">Home</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Signup</a></li>
+        {% endif %}
+    </ul>
+</div>
+
+<!-- JS Link -->
+<script src="{% static 'js/navbar.js' %}"></script>

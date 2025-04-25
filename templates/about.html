@@ -10,22 +10,8 @@
     <title>About Us - Skill Tracker</title>
 </head>
 <body class="body">
-    <nav class="navbar d-flex justify-content-between align-items-center px-4 py-3 mb-3">
-        <div class="d-flex align-items-center">
-            <img src="{% static 'images/ChatGPT Image Apr 22, 2025, 07_31_14 PM1.png' %}" class="logo me-3" alt="Logo">
-            <h2 class="nav-h2">Skill Tracker</h2>
-        </div>
-    
-        <div class="d-flex align-items-center gap-4">
-            <div class="nav-link d-flex gap-3 align-items-center">
-                <a href="{% url 'dashboard' %}"><h5>Home</h5></a>
-                <a href="{% url 'logout' %}"><h5>Logout</h5></a>
-            </div>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="darkModeToggle">
-            </div>
-        </div>
-    </nav>
+    <!-- templates/partials/navbar.html -->
+    {% include 'navbar.html' %}
 
     <div class="d-block align-items-center">
         <h4>About US</h4>
@@ -65,26 +51,6 @@
         <a href="#" class="footer-link">Privacy</a> |
         <a href="https://github.com/oladayotech" class="footer-link">Contact</a>
     </footer>
-
-    <script>
-        const toggle = document.getElementById('darkModeToggle');
-        const body = document.querySelector('.body');
-    
-        if (localStorage.getItem('theme') === 'light') {
-            body.classList.add('light-mode');
-            toggle.checked = true;
-        }
-    
-        toggle.addEventListener('change', function () {
-            if (this.checked) {
-                body.classList.add('light-mode');
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.classList.remove('light-mode');
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-    </script>
 
 </body>
 </html>
