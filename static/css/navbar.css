@@ -100,7 +100,7 @@ body.dark-mode .hamburger-menu ul li a:hover {
     display: block;
 }
 
-.hamburger-menu ul li a:hover {
+/* .hamburger-menu ul li a:hover { */
     background-color: #555;
     border-radius: 4px;
 }
