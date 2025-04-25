@@ -94,7 +94,7 @@ body.dark-mode .hamburger-menu ul li a:hover {
     padding: 10px 20px;
 }
 
-.hamburger-menu ul li a {
+/* .hamburger-menu ul li a { */
     color: white;
     text-decoration: none;
     display: block;
