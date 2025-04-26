@@ -23,4 +23,32 @@ array2 = [8,4,6,7,8]
 # def concate():
     # array3 = 
     # 
-/
+
+def longestword(string, lists):
+    lenght_list = len(lists)
+    lenght_string = len(string)
+    # count = 0
+    dictionary = {}
+    
+    for i in range(lenght_list):
+        count = 0
+        for j in range(lenght_string):
+            if string[j] in lists[i]:
+                count += 1
+                dictionary[lists[i]] = count
+            else:
+                dictionary[lists[i]] = count
+                # cases = cases + 1
+    print(dictionary)
+    dic
+    # print(cases)
+    return dictionary
+
+s = "abpcplea"
+# s = "a"
+home = ["ale","apple","monkey","plea"]
+longestword(s, home)
+
+dict = {"A":1,"B":2}
+
+print(dict.values())
