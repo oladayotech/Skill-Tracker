@@ -40,7 +40,11 @@ def longestword(string, lists):
                 dictionary[lists[i]] = count
                 # cases = cases + 1
     print(dictionary)
-    dic
+    print(max(dictionary.keys()))
+    # result = max(dict_long.keys())
+    for key, value in dictionary.items():
+        if value >= max(dictionary.values()):
+            return key
     # print(cases)
     return dictionary
 

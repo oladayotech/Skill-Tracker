@@ -10,6 +10,12 @@ def home(request):
         return redirect('dashboard')  # Redirect to the dashboard if already logged in
     return render(request, 'index.html')
 
+def navbar(request):
+    # Check if the user is already authenticated
+    # if request.user.is_authenticated:
+    #     return redirect('dashboard')  # Redirect to the dashboard if already logged in
+    return render(request, 'navbar.html')
+
 def user_signup(request):
     if request.user.is_authenticated:
         return redirect('dashboard')  # Redirect to the dashboard if already logged in

@@ -3,14 +3,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const hamburgerMenu = document.getElementById("hamburgerMenu");
     const darkToggle = document.getElementById("darkModeToggle");
 
-    // Toggle Hamburger Menu
-    hamburger?.addEventListener("click", () => {
+    // Hamburger toggle
+    hamburger.addEventListener("click", () => {
         hamburger.classList.toggle("active");
         hamburgerMenu.classList.toggle("active");
     });
 
-    // Toggle Dark Mode
-    darkToggle?.addEventListener("change", () => {
-        document.body.classList.toggle("dark-mode", darkToggle.checked);
+    // Dark mode toggle
+    darkToggle.addEventListener("change", () => {
+        if (darkToggle.checked) {
+            document.body.classList.add("dark-mode");
+        } else {
+            document.body.classList.remove("dark-mode");
+        }
     });
 });
