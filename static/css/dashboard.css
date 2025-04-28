@@ -33,7 +33,7 @@
     100% { transform: scale(1); }
 }
 
-.nav-h2 {
+/* .nav-h2 {
     color: white;
     font-size: 35px;
     margin: 0;
@@ -51,7 +51,7 @@
 .nav-link a:hover {
     color: #dcdcdc;
     transform: scale(1.1);
-}
+} */
 
 .welcome-message {
     font-size: 18px;
