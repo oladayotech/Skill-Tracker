@@ -4,55 +4,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Responsive Navbar</title>
+  <title>Responsive Navbar with Dark Mode</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 </head>
 <body class="bg-gray-100">
 
+  <!-- Navbar -->
   <nav class="bg-transparent backdrop-blur-md shadow-md p-4 flex items-center justify-between fixed w-full z-50">
+    <!-- Logo and Title -->
     <div class="flex items-center space-x-3">
       <img src="{% static 'images/ChatGPT Image Apr 22, 2025, 07_31_14 PM1.png' %}" class="h-10 w-10" alt="Logo">
       <div class="text-2xl font-bold">Skill Tracker</div>
     </div>
 
     <!-- Desktop Menu -->
-    <div class="hidden md:flex space-x-6">
+    <div class="hidden md:flex items-center space-x-6">
       <a href="#" class="hover:text-blue-500">Home</a>
       <a href="#" class="hover:text-blue-500">About</a>
       <a href="#" class="hover:text-blue-500">Services</a>
       <a href="#" class="hover:text-blue-500">Contact</a>
       <a href="#" class="hover:text-blue-500">Logout</a>
+
+      <!-- Dark Mode Toggle (Desktop) -->
+      <label class="inline-flex items-center cursor-pointer">
+        <input type="checkbox" id="dark-toggle" class="form-check-input sr-only">
+        <span class="w-10 h-5 flex items-center bg-gray-300 rounded-full p-1 transition-all duration-300 ease-in-out">
+          <span class="w-4 h-4 bg-white rounded-full shadow-md transform transition duration-300 ease-in-out"></span>
+        </span>
+      </label>
     </div>
 
-    <!-- Mobile Hamburger -->
-    <div class="md:hidden">
+    <!-- Mobile Hamburger + Toggle -->
+    <div class="md:hidden flex items-center space-x-2">
       <button id="menu-toggle" class="focus:outline-none">
-        <!-- Hamburger Icon -->
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
              xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
+
+      <!-- Dark Mode Toggle (Mobile) -->
+      <label class="inline-flex items-center cursor-pointer ml-2">
+        <input type="checkbox" id="dark-toggle-mobile" class="form-check-input sr-only">
+        <span class="w-10 h-5 flex items-center bg-gray-300 rounded-full p-1 transition-all duration-300 ease-in-out">
+          <span class="w-4 h-4 bg-white rounded-full shadow-md transform transition duration-300 ease-in-out"></span>
+        </span>
+      </label>
     </div>
   </nav>
 
-  <!-- Mobile Dropdown Menu -->
-  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md space-y-4 p-4">
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md space-y-4 p-4 mt-20">
     <a href="#" class="block hover:text-blue-500">Home</a>
     <a href="#" class="block hover:text-blue-500">About</a>
     <a href="#" class="block hover:text-blue-500">Services</a>
     <a href="#" class="block hover:text-blue-500">Contact</a>
     <a href="#" class="block hover:text-blue-500">Logout</a>
-    
   </div>
 
+  <!-- JavaScript for Menu and Dark Mode -->
   <script>
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
+    const darkToggle = document.getElementById('dark-toggle');
+    const darkToggleMobile = document.getElementById('dark-toggle-mobile');
 
+    // Show/hide mobile menu
     menuToggle.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
+    });
+
+    // Enable Dark Mode
+    function enableDarkMode() {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('darkMode', 'enabled');
+      syncToggles(true);
+    }
+
+    // Disable Dark Mode
+    function disableDarkMode() {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('darkMode', 'disabled');
+      syncToggles(false);
+    }
+
+    // Sync both toggles
+    function syncToggles(state) {
+      darkToggle.checked = state;
+      darkToggleMobile.checked = state;
+    }
+
+    // Load saved preference
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      enableDarkMode();
+    }
+
+    // Toggle listeners
+    darkToggle.addEventListener('change', () => {
+      darkToggle.checked ? enableDarkMode() : disableDarkMode();
+    });
+
+    darkToggleMobile.addEventListener('change', () => {
+      darkToggleMobile.checked ? enableDarkMode() : disableDarkMode();
     });
   </script>
 
