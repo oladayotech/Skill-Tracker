@@ -30,7 +30,7 @@
       <label class="inline-flex items-center cursor-pointer">
         <input type="checkbox" id="dark-toggle" class="form-check-input sr-only">
         <span class="w-10 h-5 flex items-center bg-gray-300 rounded-full p-1 transition-all duration-300 ease-in-out">
-          <span class="w-4 h-4 bg-white rounded-full shadow-md transform transition duration-300 ease-in-out"></span>
+          <span class="moon-sun-icons w-4 h-4 bg-white rounded-full shadow-md transform transition duration-300 ease-in-out"></span>
         </span>
       </label>
     </div>
@@ -48,7 +48,7 @@
       <label class="inline-flex items-center cursor-pointer ml-2">
         <input type="checkbox" id="dark-toggle-mobile" class="form-check-input sr-only">
         <span class="w-10 h-5 flex items-center bg-gray-300 rounded-full p-1 transition-all duration-300 ease-in-out">
-          <span class="w-4 h-4 bg-white rounded-full shadow-md transform transition duration-300 ease-in-out"></span>
+          <span class="moon-sun-icons w-4 h-4 bg-white rounded-full shadow-md transform transition duration-300 ease-in-out"></span>
         </span>
       </label>
     </div>
@@ -69,6 +69,8 @@
     const mobileMenu = document.getElementById('mobile-menu');
     const darkToggle = document.getElementById('dark-toggle');
     const darkToggleMobile = document.getElementById('dark-toggle-mobile');
+    const moonSunIconsDesktop = darkToggle.nextElementSibling.querySelector('.moon-sun-icons');
+    const moonSunIconsMobile = darkToggleMobile.nextElementSibling.querySelector('.moon-sun-icons');
 
     // Show/hide mobile menu
     menuToggle.addEventListener('click', () => {
@@ -80,6 +82,7 @@
       document.body.classList.add('dark-mode');
       localStorage.setItem('darkMode', 'enabled');
       syncToggles(true);
+      updateIcons(true);
     }
 
     // Disable Dark Mode
@@ -87,12 +90,28 @@
       document.body.classList.remove('dark-mode');
       localStorage.setItem('darkMode', 'disabled');
       syncToggles(false);
+      updateIcons(false);
     }
 
     // Sync both toggles
     function syncToggles(state) {
       darkToggle.checked = state;
       darkToggleMobile.checked = state;
+    }
+
+    // Update icons (Moon & Sun)
+    function updateIcons(isDarkMode) {
+      if (isDarkMode) {
+        moonSunIconsDesktop.classList.add('moon-icon');
+        moonSunIconsDesktop.classList.remove('sun-icon');
+        moonSunIconsMobile.classList.add('moon-icon');
+        moonSunIconsMobile.classList.remove('sun-icon');
+      } else {
+        moonSunIconsDesktop.classList.add('sun-icon');
+        moonSunIconsDesktop.classList.remove('moon-icon');
+        moonSunIconsMobile.classList.add('sun-icon');
+        moonSunIconsMobile.classList.remove('moon-icon');
+      }
     }
 
     // Load saved preference
