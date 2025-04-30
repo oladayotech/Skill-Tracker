@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Responsive Navbar</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 </head>
 <body class="bg-gray-100">
 
-  <nav class="bg-white shadow-md p-4 flex items-center justify-between">
-    <div class="text-2xl font-bold">Skill Tracker</div>
+  <nav class="bg-transparent backdrop-blur-md shadow-md p-4 flex items-center justify-between fixed w-full z-50">
+    <div class="flex items-center space-x-3">
+      <img src="{% static 'images/ChatGPT Image Apr 22, 2025, 07_31_14 PM1.png' %}" class="h-10 w-10" alt="Logo">
+      <div class="text-2xl font-bold">Skill Tracker</div>
+    </div>
 
     <!-- Desktop Menu -->
     <div class="hidden md:flex space-x-6">
@@ -17,6 +22,7 @@
       <a href="#" class="hover:text-blue-500">About</a>
       <a href="#" class="hover:text-blue-500">Services</a>
       <a href="#" class="hover:text-blue-500">Contact</a>
+      <a href="#" class="hover:text-blue-500">Logout</a>
     </div>
 
     <!-- Mobile Hamburger -->
@@ -37,6 +43,8 @@
     <a href="#" class="block hover:text-blue-500">About</a>
     <a href="#" class="block hover:text-blue-500">Services</a>
     <a href="#" class="block hover:text-blue-500">Contact</a>
+    <a href="#" class="block hover:text-blue-500">Logout</a>
+    
   </div>
 
   <script>
