@@ -20,19 +20,24 @@
 
     <!-- Desktop Menu -->
     <div class="hidden md:flex items-center space-x-6">
+      
+      {% if user.is_authenticated %}
       <a href="{% url 'dashboard' %}" class="hover:text-blue-500">Home</a>
       <a href="{% url 'about' %}" class="hover:text-blue-500">About</a>
-      <!-- <a href="{% url 'dashboard' %}" class="hover:text-blue-500">Services</a> -->
-      <a href="#" class="hover:text-blue-500">Contact</a>
+      <a href="{% url 'journal' %}" class="hover:text-blue-500">Journal</a>
+      <!-- <a href="#" class="hover:text-blue-500">Contact</a> -->
       <a href="{% url 'logout' %}" class="hover:text-blue-500">Logout</a>
+      {% else %}
+      <a href="{% url 'signup' %}" class="hover:text-blue-500">Sign Up</a>
+      <a href="{% url 'login' %}" class="hover:text-blue-500">Login</a>
+      {% endif %}
+        
 
       <!-- Dark Mode Toggle (Desktop) -->
-      <label class="inline-flex items-center cursor-pointer">
-        <input type="checkbox" id="dark-toggle" class="form-check-input sr-only">
-        <span class="w-10 h-5 flex items-center bg-gray-300 rounded-full p-1 transition-all duration-300 ease-in-out">
-          <span class="moon-sun-icons w-4 h-4 bg-white rounded-full shadow-md transform transition duration-300 ease-in-out"></span>
-        </span>
-      </label>
+      <!-- Dark Mode Toggle (Desktop) -->
+      <button id="dark-toggle" class="ml-auto">
+        <img id="dark-icon-desktop" src="{% static 'images/moon-icon.png' %}" alt="Dark Mode" class="w-6 h-6">
+      </button>
     </div>
 
     <!-- Mobile Hamburger + Toggle -->
@@ -45,26 +50,23 @@
       </button>
 
       <!-- Dark Mode Toggle (Mobile) -->
-      <label class="inline-flex items-center cursor-pointer ml-2">
-        <input type="checkbox" id="dark-toggle-mobile" class="form-check-input sr-only">
-        <span class="w-10 h-5 flex items-center bg-gray-300 rounded-full p-1 transition-all duration-300 ease-in-out">
-          <span class="moon-sun-icons w-4 h-4 bg-white rounded-full shadow-md transform transition duration-300 ease-in-out"></span>
-        </span>
-      </label>
+      <button id="dark-toggle-mobile" class="ml-2">
+        <img id="dark-icon-mobile" src="{% static 'images/moon-icon.png' %}" alt="Dark Mode" class="w-6 h-6">
+      </button>
     </div>
   </nav>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md space-y-4 p-4 mt-20">
-    
+  <div id="mobile-menu" class="hidden md:hidden bg-white/80 backdrop-blur-md shadow-md space-y-4 p-4 mt-20 z-60">
+
     {% if user.is_authenticated %}
     <a href="{% url 'dashboard' %}" class="block hover:text-blue-500">Home</a>
     <a href="{% url 'about' %}" class="block hover:text-blue-500">About</a>
-    <!-- <a href="{% url 'dashboard' %}" class="block hover:text-blue-500">Services</a> -->
-    <a href="#" class="block hover:text-blue-500">Contact</a>
+    <a href="{% url 'journal' %}" class="block hover:text-blue-500">Journal</a>
+    <!-- <a href="#" class="block hover:text-blue-500">Contact</a> -->
     <a href="{% url 'logout' %}" class="block hover:text-blue-500">Logout</a>
     {% else %}
-    <a href="{% url 'login' %}" class="block hover:text-blue-500">Signup</a>
+    <a href="{% url 'signup' %}" class="block hover:text-blue-500">Signup</a>
     <a href="{% url 'login' %}" class="block hover:text-blue-500">Login</a>
     {% endif %}
       
@@ -72,23 +74,13 @@
 
   <!-- JavaScript for Menu and Dark Mode -->
   <script>
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const darkToggle = document.getElementById('dark-toggle');
-    const darkToggleMobile = document.getElementById('dark-toggle-mobile');
-    const moonSunIconsDesktop = darkToggle.nextElementSibling.querySelector('.moon-sun-icons');
-    const moonSunIconsMobile = darkToggleMobile.nextElementSibling.querySelector('.moon-sun-icons');
-
-    // Show/hide mobile menu
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
+    const desktopIcon = document.getElementById('dark-icon-desktop');
+    const mobileIcon = document.getElementById('dark-icon-mobile');
 
     // Enable Dark Mode
     function enableDarkMode() {
       document.body.classList.add('dark-mode');
       localStorage.setItem('darkMode', 'enabled');
-      syncToggles(true);
       updateIcons(true);
     }
 
@@ -96,44 +88,60 @@
     function disableDarkMode() {
       document.body.classList.remove('dark-mode');
       localStorage.setItem('darkMode', 'disabled');
-      syncToggles(false);
       updateIcons(false);
     }
 
-    // Sync both toggles
-    function syncToggles(state) {
-      darkToggle.checked = state;
-      darkToggleMobile.checked = state;
-    }
-
-    // Update icons (Moon & Sun)
+    // Update Icons
     function updateIcons(isDarkMode) {
-      if (isDarkMode) {
-        moonSunIconsDesktop.classList.add('moon-icon');
-        moonSunIconsDesktop.classList.remove('sun-icon');
-        moonSunIconsMobile.classList.add('moon-icon');
-        moonSunIconsMobile.classList.remove('sun-icon');
-      } else {
-        moonSunIconsDesktop.classList.add('sun-icon');
-        moonSunIconsDesktop.classList.remove('moon-icon');
-        moonSunIconsMobile.classList.add('sun-icon');
-        moonSunIconsMobile.classList.remove('moon-icon');
-      }
+      const moon = "{% static 'images/moon-icon.png' %}";
+      const sun = "{% static 'images/sun-icon.png' %}";
+
+      desktopIcon.src = isDarkMode ? moon : sun;
+      mobileIcon.src = isDarkMode ? moon : sun;
     }
 
-    // Load saved preference
+    // Load preference
     if (localStorage.getItem('darkMode') === 'enabled') {
       enableDarkMode();
+    } else {
+      disableDarkMode();
     }
 
-    // Toggle listeners
-    darkToggle.addEventListener('change', () => {
-      darkToggle.checked ? enableDarkMode() : disableDarkMode();
+    // Toggle handlers
+    document.getElementById('dark-toggle').addEventListener('click', () => {
+      document.body.classList.contains('dark-mode') ? disableDarkMode() : enableDarkMode();
     });
 
-    darkToggleMobile.addEventListener('change', () => {
-      darkToggleMobile.checked ? enableDarkMode() : disableDarkMode();
+    document.getElementById('dark-toggle-mobile').addEventListener('click', () => {
+      document.body.classList.contains('dark-mode') ? disableDarkMode() : enableDarkMode();
     });
+    const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  let menuOpen = false;
+
+  menuToggle.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (
+      menuOpen &&
+      !mobileMenu.contains(e.target) &&
+      !menuToggle.contains(e.target)
+    ) {
+      mobileMenu.classList.add('hidden');
+      menuOpen = false;
+    }
+  });
+
+  window.addEventListener('scroll', () => {
+    if (menuOpen) {
+      mobileMenu.classList.add('hidden');
+      menuOpen = false;
+    }
+  });
   </script>
 
 </body>

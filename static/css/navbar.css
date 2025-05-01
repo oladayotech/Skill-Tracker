@@ -40,32 +40,6 @@ body.dark-mode .menu-links a {
     text-decoration: underline;
 }
 
-/* Sliding toggle animation */
-.form-check-input {
-    width: 40px;
-    height: 20px;
-    background-color: #ccc;
-    border: none;
-    cursor: pointer;
-    border-radius: 20px;
-    position: relative;
-    transition: background-color 0.3s ease;
-}
-
-.form-check-input:checked {
-    background-color: #0d6efd;
-}
-
-.form-check-input:checked + span .transform {
-    transform: translateX(20px); /* Move the toggle ball */
-}
-
-/* The circle inside the toggle button */
-.form-check-input + span .w-4 {
-    position: absolute;
-    left: 0;
-    transition: transform 0.3s ease-in-out;
-}
 
 /* Moon & Sun Icons */
 .moon-sun-icons {
@@ -88,3 +62,11 @@ body.dark-mode .menu-links a {
     left: 0;
     transition: transform 0.3s ease-in-out;
 }
+
+#mobile-menu {
+    position: absolute;
+    top: 64px; /* or match your navbar height */
+    left: 0;
+    right: 0;
+    z-index: 60; /* higher than navbar z-50 */
+  }
