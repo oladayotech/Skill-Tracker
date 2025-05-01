@@ -1,19 +1,19 @@
 /* background-color: #1e2a38; or try #243447 or #2c3e50 for similar tones */
 
-.body {
-    /* background-color: #F5F5F5; or whatever color you picked */
+/* .body {
+    background-color: #F5F5F5; or whatever color you picked
     background-color: #102ea8;
-    /* background-color: blue; */
+    background-color: blue;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white; /* default text color */
+    color: white; default text color
     margin: 0;
     padding: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-}
+} */
 
-.logo {
+/* .logo {
     width: 50px;
     height: 50px;
     border-radius: 10px;
@@ -37,7 +37,7 @@
 
 .nav-link a:hover {
     color: #00bcd4;
-}
+} */
 /* footer{
     position: absolute;
     align-items: center;

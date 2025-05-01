@@ -20,11 +20,11 @@
 
     <!-- Desktop Menu -->
     <div class="hidden md:flex items-center space-x-6">
-      <a href="#" class="hover:text-blue-500">Home</a>
-      <a href="#" class="hover:text-blue-500">About</a>
-      <a href="#" class="hover:text-blue-500">Services</a>
+      <a href="{% url 'dashboard' %}" class="hover:text-blue-500">Home</a>
+      <a href="{% url 'about' %}" class="hover:text-blue-500">About</a>
+      <!-- <a href="{% url 'dashboard' %}" class="hover:text-blue-500">Services</a> -->
       <a href="#" class="hover:text-blue-500">Contact</a>
-      <a href="#" class="hover:text-blue-500">Logout</a>
+      <a href="{% url 'logout' %}" class="hover:text-blue-500">Logout</a>
 
       <!-- Dark Mode Toggle (Desktop) -->
       <label class="inline-flex items-center cursor-pointer">
@@ -56,11 +56,18 @@
 
   <!-- Mobile Menu -->
   <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md space-y-4 p-4 mt-20">
-    <a href="#" class="block hover:text-blue-500">Home</a>
-    <a href="#" class="block hover:text-blue-500">About</a>
-    <a href="#" class="block hover:text-blue-500">Services</a>
+    
+    {% if user.is_authenticated %}
+    <a href="{% url 'dashboard' %}" class="block hover:text-blue-500">Home</a>
+    <a href="{% url 'about' %}" class="block hover:text-blue-500">About</a>
+    <!-- <a href="{% url 'dashboard' %}" class="block hover:text-blue-500">Services</a> -->
     <a href="#" class="block hover:text-blue-500">Contact</a>
-    <a href="#" class="block hover:text-blue-500">Logout</a>
+    <a href="{% url 'logout' %}" class="block hover:text-blue-500">Logout</a>
+    {% else %}
+    <a href="{% url 'login' %}" class="block hover:text-blue-500">Signup</a>
+    <a href="{% url 'login' %}" class="block hover:text-blue-500">Login</a>
+    {% endif %}
+      
   </div>
 
   <!-- JavaScript for Menu and Dark Mode -->
