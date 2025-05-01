@@ -1,9 +1,11 @@
-/* .body {
+/* General styles */
+.body {
     background-color: #102ea8;
     color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Logo and navbar styles (if used) */
 .logo {
     width: 50px;
     height: 50px;
@@ -24,8 +26,9 @@
 }
 .nav-link a:hover {
     color: #dcdcdc;
-} */
+}
 
+/* Footer */
 .footer-link {
     text-decoration: none;
     color: white;
@@ -35,12 +38,12 @@
     color: #cce3ff;
 }
 
-/* Apply light/dark background to .body, not body */
+/* Transition for theme switch */
 .body, .nav-h2, .nav-link a, footer, .footer-link, h4, h2, p {
     transition: background-color 0.4s, color 0.4s;
 }
 
-/* Light Mode */
+/* Light mode */
 .body.light-mode {
     background-color: #ffffff;
     color: #1a1a1a;
@@ -81,7 +84,7 @@
     font-weight: bold;
 }
 
-.container p {
+.container p, .container li {
     margin-bottom: 15px;
     font-size: 1.05rem;
 }
