@@ -1,40 +1,85 @@
-.body {
-    background-color: #ffffff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
+/* Reset and Base */
+* {
+    box-sizing: border-box;
+  }
+  
+  body, html {
     margin: 0;
     padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    color: #333;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-}
-
-.text-purple {
-    color: #6a1b9a; /* Rich purple */
-}
-
-.btn-purple {
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    padding: 1rem 2rem;
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #6a1b9a;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: #6a1b9a;
+  }
+  
+  /* Login Specific */
+  .text-purple {
+    color: #6a1b9a;
+  }
+  
+  .btn-purple {
     background-color: #6a1b9a;
     color: white;
     border: none;
     transition: background-color 0.3s ease;
-}
-
-.btn-purple:hover {
+  }
+  
+  .btn-purple:hover {
     background-color: #53117c;
-}
-
-footer a {
+  }
+  
+  /* Footer */
+  footer {
+    font-size: 14px;
+    background-color: #f9f9f9;
+    color: #6a1b9a;
+  }
+  
+  footer a {
     margin-left: 10px;
     color: #6a1b9a;
     text-decoration: none;
-}
-
-footer a:hover {
+  }
+  
+  footer a:hover {
     text-decoration: underline;
-}
-
-footer {
-    width: 100%;
-    font-size: 14px;
-}
+  }
+  
