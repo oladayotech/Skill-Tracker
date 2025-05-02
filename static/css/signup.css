@@ -1,15 +1,12 @@
-h1 {
+h1, .text-purple {
+    color: purple;
     font-weight: 700;
-    color: #2b2f4e;
 }
 
 .body {
-    /* background-color: #F5F5F5; or whatever color you picked */
     background-color: #102ea8;
-    /* background-color: blue; */
-    /* background-color: #f8f9fa; */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white; /* default text color */
+    color: white;
     margin: 0;
     padding: 0;
     min-height: 100vh;
@@ -17,42 +14,19 @@ h1 {
     flex-direction: column;
 }
 
-.logo {
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
-    padding: 5px;
-}
-
-.nav-h2 {
-    color: white;
-    font-size: 35px;
-    margin: 0;
-}
-
-.nav-link a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-.nav-link a:hover {
-    color: #dcdcdc;
-}
-
-.nav-link a:hover {
-    color: #00bcd4;
-}
-
 footer {
-    position: absolute;
-    bottom: 20px;
     width: 100%;
-    text-align: center;
     font-size: 14px;
+    background-color: #fff;
     color: #102ea8;
 }
-footer a{
-    text-decoration: none;
+
+footer a {
     margin-left: 10px;
     color: #102ea8;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }
