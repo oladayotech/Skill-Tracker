@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
+from .models import Journal
+
 # Create your views here.
 def home(request):
     # Check if the user is already authenticated

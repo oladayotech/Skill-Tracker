@@ -1,8 +1,8 @@
 .footer {
-    background-color: #0c245f;
+    /* background-color: #0c245f; */
     color: white;
     padding: 1rem 0;
-    position: absolute;
+    /* position: absolute; */
     transition: background-color 0.4s, color 0.4s;
 }
 
