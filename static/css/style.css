@@ -1,59 +1,54 @@
-/* background-color: #1e2a38; or try #243447 or #2c3e50 for similar tones */
-
-/* .body {
-    background-color: #F5F5F5; or whatever color you picked
-    background-color: #102ea8;
-    background-color: blue;
+/* Base layout */
+.custom-body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white; default text color
+    background-color: #fdfdfd;
     margin: 0;
     padding: 0;
+    color: #333;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-} */
-
-/* .logo {
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
-    padding: 5px;
-}
-
-.nav-h2 {
+  }
+  
+  /* Colors */
+  .text-purple {
+    color: #7b2cbf !important;
+  }
+  .btn-purple {
+    background-color: #7b2cbf !important;
+    color: white !important;
+    border: none;
+  }
+  .btn-purple:hover {
+    background-color: #5a189a !important;
+    color: white !important;
+  }
+  .btn-outline-purple {
+    border: 2px solid #7b2cbf;
+    color: #7b2cbf;
+  }
+  .btn-outline-purple:hover {
+    background-color: #7b2cbf;
     color: white;
-    font-size: 35px;
-    margin: 0;
-}
-
-.nav-link a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-.nav-link a:hover {
-    color: #dcdcdc;
-}
-
-.nav-link a:hover {
-    color: #00bcd4;
-} */
-/* footer{
-    position: absolute;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-} */
-footer {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-    text-align: center;
+  }
+  
+  /* Hero Section */
+  .hero-section {
+    background-color: #f3edff;
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: #fff;
+    color: #333;
     font-size: 14px;
-    color: white;
-}
-footer a{
+    border-top: 1px solid #eaeaea;
+    margin-top: auto;
+  }
+  .footer a {
     text-decoration: none;
-    margin-left: 10px;
-    color: white;
-}
+    color: #7b2cbf;
+    margin: 0 5px;
+  }
+  .footer a:hover {
+    text-decoration: underline;
+  }
+  
