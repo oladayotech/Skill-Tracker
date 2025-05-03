@@ -10,4 +10,5 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('about/', views.about, name='about'),
     path('journal/', views.journal, name='journal'),
+    path('journal-details/<int:pk>/', views.journal_details, name='journal-details'),
 ]

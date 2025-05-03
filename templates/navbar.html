@@ -22,14 +22,14 @@
     <div class="hidden md:flex items-center space-x-6">
       
       {% if user.is_authenticated %}
-      <a href="{% url 'dashboard' %}" class="hover:text-blue-500">Home</a>
-      <a href="{% url 'about' %}" class="hover:text-blue-500">About</a>
-      <a href="{% url 'journal' %}" class="hover:text-blue-500">Journal</a>
+      <a href="{% url 'dashboard' %}" class="hover:text-purple-500">Home</a>
+      <a href="{% url 'about' %}" class="hover:text-purple-500">About</a>
+      <a href="{% url 'journal' %}" class="hover:text-purple-500">Journal</a>
       <!-- <a href="#" class="hover:text-blue-500">Contact</a> -->
-      <a href="{% url 'logout' %}" class="hover:text-blue-500">Logout</a>
+      <a href="{% url 'logout' %}" class="hover:text-purple-500">Logout</a>
       {% else %}
-      <a href="{% url 'signup' %}" class="hover:text-blue-500">Sign Up</a>
-      <a href="{% url 'login' %}" class="hover:text-blue-500">Login</a>
+      <a href="{% url 'signup' %}" class="hover:text-purple-500">Sign Up</a>
+      <a href="{% url 'login' %}" class="hover:text-purple-500">Login</a>
       {% endif %}
         
 
@@ -60,14 +60,14 @@
   <div id="mobile-menu" class="hidden md:hidden bg-white/80 backdrop-blur-md shadow-md space-y-4 p-4 mt-20 z-60">
 
     {% if user.is_authenticated %}
-    <a href="{% url 'dashboard' %}" class="block hover:text-blue-500">Home</a>
-    <a href="{% url 'about' %}" class="block hover:text-blue-500">About</a>
-    <a href="{% url 'journal' %}" class="block hover:text-blue-500">Journal</a>
+    <a href="{% url 'dashboard' %}" class="block hover:text-purple-500">Home</a>
+    <a href="{% url 'about' %}" class="block hover:text-purple-500">About</a>
+    <a href="{% url 'journal' %}" class="block hover:text-purple-500">Journal</a>
     <!-- <a href="#" class="block hover:text-blue-500">Contact</a> -->
-    <a href="{% url 'logout' %}" class="block hover:text-blue-500">Logout</a>
+    <a href="{% url 'logout' %}" class="block hover:text-purple-500">Logout</a>
     {% else %}
-    <a href="{% url 'signup' %}" class="block hover:text-blue-500">Signup</a>
-    <a href="{% url 'login' %}" class="block hover:text-blue-500">Login</a>
+    <a href="{% url 'signup' %}" class="block hover:text-purple-500">Signup</a>
+    <a href="{% url 'login' %}" class="block hover:text-purple-500">Login</a>
     {% endif %}
       
   </div>

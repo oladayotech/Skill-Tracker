@@ -17,25 +17,34 @@
         <h2>Journal</h2>
         
         <div class="card p-4 m-2">
-            <!-- <h5 class=""><label for="journal_title">Create Journal Entry</label></h5>
-            <input type="text" name="journal_title" placeholder="How was your day in a word"> -->
-            <h5 class=""><label for="journal_content">Create Journal Entry</label></h5>
-            <input type="text" name="journal_content" placeholder="Tell me all about your day">
-            <input class="m-2" type="image" src="" alt="" placeholder="+ Add Image">
-            <button class="p-2 bg-primary" type="submit">Save</button>
+            <form action="" method="post">
+                {% csrf_token %}
+                <!-- <h5 class=""><label for="journal_title">Create Journal Entry</label></h5>
+                <input type="text" name="journal_title" placeholder="How was your day in a word"> -->
+                <h5 class=""><label for="journal_content">Create Journal Entry</label></h5>
+                <input type="text" name="journal_content" placeholder="Tell me all about your day">
+
+                <!-- <input class="m-2" type="file" src="" name="journal_image" alt="" placeholder="+ Add Image"> -->
+                <button class="p-2" type="submit">Save</button>
+            </form>
         </div>
     </div>
     <div>
         <div class="m-2">
-            <div class="card p-4 m-4">
+            <div class="card p-4 m-4" >
+                
+                {% for journal in journal_list reversed %}
                 <h5>Yesterday</h5>
                 <div class="d-flex p-2 align-items-center">
                     <img src="{% static 'images\20241022_143310.jpg' %}" alt="" width="150" height="150">
-                    <p>Went for a hike in the mountains today. The weather was perfect and the views were amazing!</p>
+                    <p>{{ journal.journal_content }}</p>
+                    <!-- <p>Went for a hike in the mountains today. The weather was perfect and the views were amazing!</p> -->
                 </div>
                 <a class="text-decoration-none text-bold" href="#">Edit</a>
+                {% endfor %}
+                    
             </div>
-            <div class="card p-4 m-4">
+            <!-- <div class="card p-4 m-4">
                 <h5>Yesterday</h5>
                 <div class="d-flex p-2 align-items-center">
                     <img src="{% static 'images\20241022_143310.jpg' %}" alt="" width="150" height="150">
@@ -48,7 +57,7 @@
                     <img src="{% static 'images\20241022_143310.jpg' %}" alt="" width="150" height="150">
                     <p>Went for a hike in the mountains today. The weather was perfect and the views were amazing!</p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 

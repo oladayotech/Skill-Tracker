@@ -6,8 +6,8 @@ class Journal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     # journal_title = models.CharField(max_length=300)
     journal_content = models.TextField()
-    journal_image = models.ImageField()
+    # journal_image = models.ImageField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
-    def __str__(self):
-        return self.journal_title
+    # def __str__(self):
+    #     return self.user

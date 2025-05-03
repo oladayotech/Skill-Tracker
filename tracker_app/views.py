@@ -75,4 +75,21 @@ def about(request):
     return render(request, 'about.html')
 
 def journal(request):
-    return render(request, 'journal.html')
+    if request.method == "POST":
+        journal_content = request.POST['journal_content']
+        # journal_image = request.POST['journal_image']
+        new_journal = Journal.objects.create(
+            user = request.user,
+            journal_content = journal_content,
+            # journal_image = journal_image,
+        )
+        new_journal.save()
+    journal_list = Journal.objects.filter(user = request.user)
+    return render(request, 'journal.html', {'journal_list':journal_list})
+
+def journal_details(request, pk):
+    journal_detail = Journal.objects.get(id=pk)
+    if request.user == journal_detail.user:
+        return render(request, 'journal_detail.html', {'journal_detail':journal_detail})
+    else:
+        return redirect('journal')
