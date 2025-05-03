@@ -4,58 +4,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login</title>
+  <title>Sign Up</title>
   <link rel="stylesheet" href="{% static 'css/login.css' %}" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="body">
-  <!-- Custom Navbar (Not Included) -->
+<body>
   <nav class="navbar">
     <div class="navbar-container">
       <h2 class="nav-logo">SkillTracker</h2>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
         <li><a href="#">Help</a></li>
       </ul>
     </div>
   </nav>
 
-  <div class="container py-4">
-    <div class="row align-items-center">
-      <!-- Form -->
-      <div class="col-lg-6 col-md-7 col-sm-12 mb-4 mb-md-0">
-        <h1 class="text-purple mb-3">Login</h1>
-        {% if error_message %}
-          <div class="alert alert-danger">{{ error_message }}</div>
-        {% endif %}
-        <form action="" method="post">
-          {% csrf_token %}
-          <label for="username">Username</label>
-          <input type="text" name="username" id="username" class="form-control mb-3" placeholder="e.g. johndoe" required>
+  <main class="login-container">
+    <section class="login-box">
+      <h1 class="login-title">Get Started</h1>
+      <p class="login-sub">Create an account</p>
+      {% if error_message %}
+        <div class="error">{{ error_message }}</div>
+      {% endif %}
+      <form action="" method="post">
+        {% csrf_token %}
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" placeholder="e.g. johndoe" required>
 
-          <label for="password">Password</label>
-          <input type="password" name="password" id="password" class="form-control mb-3" required>
+        <label for="name">Email</label>
+        <input type="email" name="email" id="email" placeholder="johndoe@gmail.com">
 
-          <button class="btn btn-purple w-100 p-2 mt-2" type="submit">Login</button>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
 
-          <p class="mt-3">
-            Don't have an account?
-            <a href="{% url 'signup' %}">Sign up</a>
-          </p>
-        </form>
-      </div>
+        <label for="password">Confirm Password</label>
+        <input type="password" name="password1" id="password1" required>
 
-      <!-- Image -->
-      <div class="col-lg-6 col-md-5 col-sm-12 text-center">
-        <img src="{% static 'images/Secure login-rafiki.png' %}" class="img-fluid" alt="Login illustration">
-      </div>
-    </div>
-  </div>
+        <button type="submit">Sign Up</button>
+        <p class="signup-prompt">
+            Already have an account? <a href="{% url 'login' %}">Login</a>
+        </p>
+      </form>
+    </section>
+    <section class="login-illustration">
+      <img src="{% static 'images\Login-amico.png' %}" alt="Illustration" />
+    </section>
+  </main>
 
-  <footer class="mt-auto text-center p-3">
+  <footer class="footer">
     &copy; 2025 SkillTracker — Built by Abdulquahaar 💜 |
-    <a href="#">Privacy</a> |
     <a href="https://github.com/oladayotech">Contact</a>
   </footer>
 </body>
