@@ -5,13 +5,74 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Skill Tracker</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+  <!-- Bootstrap CSS -->
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
   />
+
+  <!-- Custom CSS -->
+  <style>
+    /* Base layout */
+    body.custom-body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fdfdfd;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Colors */
+    .text-purple {
+      color: #7b2cbf !important;
+    }
+    .btn-purple {
+      background-color: #7b2cbf !important;
+      color: white !important;
+      border: none;
+    }
+    .btn-purple:hover {
+      background-color: #5a189a !important;
+      color: white !important;
+    }
+    .btn-outline-purple {
+      border: 2px solid #7b2cbf;
+      color: #7b2cbf;
+    }
+    .btn-outline-purple:hover {
+      background-color: #7b2cbf;
+      color: white;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background-color: #f3edff;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #fff;
+      color: #333;
+      font-size: 14px;
+      border-top: 1px solid #eaeaea;
+      margin-top: auto;
+    }
+    .footer a {
+      text-decoration: none;
+      color: #7b2cbf;
+      margin: 0 5px;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
-<body class="custom-body d-flex flex-column">
+
+<body class="custom-body">
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg bg-white shadow-sm">
@@ -27,7 +88,7 @@
           <li class="nav-item mx-2"><a class="nav-link text-purple" href="#">FAQs</a></li>
         </ul>
         <div class="d-flex">
-          <a href="login" class="btn btn-purple me-2 text-purple">Login</a>
+          <a href="login" class="btn btn-purple me-2">Login</a>
           <a href="signup" class="btn btn-purple">Get Started</a>
         </div>
       </div>
@@ -41,16 +102,18 @@
         <div class="col-lg-6 text-center text-lg-start mb-4 mb-lg-0">
           <span class="badge bg-light text-purple mb-3 p-2 rounded-pill shadow-sm">Define goals, connect, grow</span>
           <h1 class="display-5 fw-bold text-dark mb-3">
-            Track your growth <span class="text-purple">and own your journey</span>.
+            <span class="text-purple">Track your growth and own your journey</span>.
           </h1>
-          <p class="lead text-muted mb-4">Take control of your skills and reach your goals with clarity and motivation.</p>
+          <p class="lead text-muted mb-4">
+            Take control of your skills and reach your goals with clarity and motivation.
+          </p>
           <div>
             <a href="signup" class="btn btn-purple btn-lg me-3">Get Started</a>
             <a href="#" class="btn btn-outline-purple btn-lg">Our Solutions</a>
           </div>
         </div>
         <div class="col-lg-6 text-center">
-          <img src="{% static 'images/ChatGPT Image Apr 22, 2025, 07_31_14 PM.png' %}" alt="Hero" class="img-fluid rounded shadow" />
+          <img src="{% static 'images/ChatGPT Image Apr 22, 2025, 07_31_14 PM.png' %}" alt="Hero Image" class="img-fluid rounded shadow" />
         </div>
       </div>
     </div>
@@ -60,9 +123,10 @@
   <footer class="footer text-center py-3">
     &copy; 2025 Built with 💜 by Abdulquahaar |
     <a href="#">Privacy</a> |
-    <a href="https://github.com/oladayotech">Contact</a>
+    <a href="https://github.com/oladayotech" target="_blank">Contact</a>
   </footer>
 
+  <!-- Bootstrap Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

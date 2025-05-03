@@ -1,138 +1,69 @@
-.body {
-    background-color: #102ea8;
-    color: white;
+body.body {
+    background-color: #f5f7fa;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    animation: fadeIn 1s ease-in;
-}
-
-.hero-banner {
-    background: url("{% static 'images\ChatGPT Image Apr 24, 2025, 02_51_11 PM.png' %}") center/cover no-repeat;
-    min-height: 60vh;
-    padding-top: 60px;
-    padding-bottom: 60px;
-    margin-bottom: 40px; /* Add this line */
-    animation: fadeInHero 2s ease-in-out;
-}
-
-@keyframes fadeInHero {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.logo {
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
-    padding: 5px;
-    animation: bounceIn 0.8s ease-in-out;
-}
-
-@keyframes bounceIn {
-    0% { transform: scale(0.8); opacity: 0; }
-    50% { transform: scale(1.1); opacity: 1; }
-    100% { transform: scale(1); }
-}
-
-/* .nav-h2 {
-    color: white;
-    font-size: 35px;
-    margin: 0;
-    transition: transform 0.3s;
-}
-.nav-h2:hover {
-    transform: scale(1.05);
-}
-
-.nav-link a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s, transform 0.2s;
-}
-.nav-link a:hover {
-    color: #dcdcdc;
-    transform: scale(1.1);
-} */
-
-.welcome-message {
-    font-size: 18px;
-    animation: slideIn 0.6s ease;
-}
-
-@keyframes slideIn {
-    from { opacity: 0; transform: translateX(-30px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-.card {
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-hover:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
-}
-
-.footer-link {
-    text-decoration: none;
-    color: white;
-    margin: 0 5px;
-    transition: color 0.3s;
-}
-.footer-link:hover {
-    color: #cce3ff;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Gradient overlay */
-.gradient-overlay {
+  }
+  
+  .hero-banner {
+    height: 60vh;
+    background: url('/static/images/dashboard-bg.jpg') no-repeat center center/cover;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .gradient-overlay {
     position: absolute;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom right, rgba(16, 46, 168, 0.5), rgba(0, 0, 0, 0.6));
+    background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.3));
     z-index: 0;
-}
-
-/* Typewriter effect */
-.typewriter {
+  }
+  
+  .typewriter {
     overflow: hidden;
     white-space: nowrap;
-    border-right: 2px solid white;
-    animation: typing 3s steps(30, end) infinite, blink 0.8s step-end infinite;
-    width: 0;
-    display: inline-block;
-    max-width: 100%;
-}
-
-@keyframes typing {
+    animation: typing 3s steps(40, end);
+    border-right: 3px solid rgba(255,255,255,0.75);
+  }
+  
+  @keyframes typing {
     from { width: 0; }
     to { width: 100%; }
-}
-
-@keyframes blink {
-    50% { border-color: transparent; }
-}
-
-/* Button (can be styled more later) */
-#themeToggle {
-    font-size: 1.2rem;
-    border-radius: 20px;
-    padding: 5px 15px;
-    transition: all 0.3s ease;
-}
-
-.dark-mode {
-    background-color: #000814;
-    color: #fff;
-}
-
-.dark-mode .card {
-    background-color: #1c1c1c;
-    color: #e0e0e0;
-}
+  }
+  
+  .card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+    border: none;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  footer {
+    background-color: #212529;
+    color: #ffffff;
+  }
+  
+  .footer-link {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 5px;
+  }
+  
+  .footer-link:hover {
+    text-decoration: underline;
+  }
+  
+  a.text-primary {
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  a.text-primary:hover {
+    color: #0a58ca;
+  }
+  
