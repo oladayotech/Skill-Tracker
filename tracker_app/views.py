@@ -90,6 +90,6 @@ def journal(request):
 def journal_details(request, pk):
     journal_detail = Journal.objects.get(id=pk)
     if request.user == journal_detail.user:
-        return render(request, 'journal_detail.html', {'journal_detail':journal_detail})
+        return render(request, 'journal_details.html', {'journal_detail':journal_detail})
     else:
         return redirect('journal')

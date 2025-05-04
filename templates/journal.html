@@ -3,68 +3,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/journal.css' %}">
-    <title>Journal - Skill Tracker</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Journal</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f9f5ff;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .card {
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      background: #fff;
+    }
+
+    h2 {
+      font-weight: 800;
+      color: #4b0082;
+    }
+
+    input[type="text"] {
+      border-radius: 12px;
+      padding: 12px;
+      border: 1px solid #ddd;
+      width: 100%;
+    }
+
+    .btn-purple {
+      background: #7b2cbf;
+      color: white;
+      border-radius: 12px;
+      padding: 10px 20px;
+      border: none;
+      width: 100%;
+    }
+
+    .btn-purple:hover {
+      background-color: #5a189a;
+    }
+
+    .btn-outline-purple {
+      border: 2px solid #ddd;
+      background: white;
+      color: #7b2cbf;
+      font-weight: 500;
+      border-radius: 10px;
+    }
+
+    .btn-outline-purple:hover {
+      background: #f3e8ff;
+      border-color: #7b2cbf;
+    }
+
+    .journal-entry {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .journal-entry img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .footer {
+      color: #555;
+      font-size: 14px;
+    }
+
+    .footer a {
+      color: #6a0dad;
+      text-decoration: none;
+      margin-left: 10px;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-    <!-- navbar.html -->
-    {% include 'navbar.html' %}
 
-    <div class="align-items-center">
-        <h2>Journal</h2>
-        
-        <div class="card p-4 m-2">
-            <form action="" method="post">
-                {% csrf_token %}
-                <!-- <h5 class=""><label for="journal_title">Create Journal Entry</label></h5>
-                <input type="text" name="journal_title" placeholder="How was your day in a word"> -->
-                <h5 class=""><label for="journal_content">Create Journal Entry</label></h5>
-                <input type="text" name="journal_content" placeholder="Tell me all about your day">
+  {% include 'navbar.html' %}
 
-                <!-- <input class="m-2" type="file" src="" name="journal_image" alt="" placeholder="+ Add Image"> -->
-                <button class="p-2" type="submit">Save</button>
-            </form>
+  <div class="container py-5">
+    <h1 class="text-center mb-4">SkillTracker</h1>
+    <h2 class="text-center mb-4">Journal</h2>
+
+
+    <!-- Entry Form -->
+    <div class="card p-4 mb-5">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h5 class="mb-3">Create Journal Entry</h5>
+        <input type="text" name="journal_content" placeholder="Tell me all about your day" class="mb-3" required />
+
+        <div class="d-flex justify-content-start mb-3">
+          <label class="btn btn-outline-purple">
+            <i class="bi bi-plus-lg me-2"></i> Add image
+            <input type="file" name="journal_image" hidden />
+          </label>
         </div>
-    </div>
-    <div>
-        <div class="m-2">
-            <div class="card p-4 m-4" >
-                
-                {% for journal in journal_list reversed %}
-                <h5>Yesterday</h5>
-                <div class="d-flex p-2 align-items-center">
-                    <img src="{% static 'images\20241022_143310.jpg' %}" alt="" width="150" height="150">
-                    <p>{{ journal.journal_content }}</p>
-                    <!-- <p>Went for a hike in the mountains today. The weather was perfect and the views were amazing!</p> -->
-                </div>
-                <a class="text-decoration-none text-bold" href="">Edit</a>
-                {% endfor %}
-                    
-            </div>
-            <!-- <div class="card p-4 m-4">
-                <h5>Yesterday</h5>
-                <div class="d-flex p-2 align-items-center">
-                    <img src="{% static 'images\20241022_143310.jpg' %}" alt="" width="150" height="150">
-                    <p>Went for a hike in the mountains today. The weather was perfect and the views were amazing!</p>
-                </div>
-            </div>
-            <div class="card p-4 m-4">
-                <h5>Yesterday</h5>
-                <div class="d-flex p-2 align-items-center">
-                    <img src="{% static 'images\20241022_143310.jpg' %}" alt="" width="150" height="150">
-                    <p>Went for a hike in the mountains today. The weather was perfect and the views were amazing!</p>
-                </div>
-            </div> -->
-        </div>
+
+        <button type="submit" class="btn btn-purple">Save</button>
+      </form>
     </div>
 
-    <footer class="footer text-center py-4">
-        &copy; 2025 Built with 💙 by Abdulquahaar |
-        <a href="#" class="footer-link">Privacy</a> |
-        <a href="https://github.com/oladayotech" class="footer-link" target="_blank">Contact</a>
-    </footer>
+    <!-- Journal Entries -->
+    {% if journal_list %}
+    <div class="card p-4">
+      {% for journal in journal_list %}
+      <h5>Yesterday</h5>
+      <a href="journal-details/{{ journal.id }}">
+        <div class="journal-entry mt-3 mb-4">
+            <img src="{% static 'images/20241022_143310.jpg' %}" alt="Journal image">
+            <div class="flex-grow-1">
+            <p>{{ journal.journal_content }}</p>
+            <a href="#" class="text-decoration-none text-purple fw-bold">Edit</a>
+            </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-muted text-center">No journal entries yet.</p>
+    {% endif %}
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 footer">
+    &copy; 2025 Built with 💜 by Abdulquahaar |
+    <a href="#">Privacy</a> |
+    <a href="https://github.com/oladayotech" target="_blank">Contact</a>
+  </footer>
+
+  <!-- Bootstrap Icons (Optional) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 </body>
 </html>
