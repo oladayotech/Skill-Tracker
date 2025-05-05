@@ -77,11 +77,11 @@ def about(request):
 def journal(request):
     if request.method == "POST":
         journal_content = request.POST['journal_content']
-        # journal_image = request.POST['journal_image']
+        journal_image = request.POST['journal_image']
         new_journal = Journal.objects.create(
             user = request.user,
             journal_content = journal_content,
-            # journal_image = journal_image,
+            journal_image = journal_image,
         )
         new_journal.save()
     journal_list = Journal.objects.filter(user = request.user)
