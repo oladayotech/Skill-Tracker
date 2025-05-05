@@ -24,8 +24,11 @@
                     <h2>Journal Details</h2>
                     <h2>Journal Details</h2>
                     <h2>Journal Details</h2>                    
-                    <!-- <img src="{% static 'images/20241022_143310.jpg' %}" alt="Journal image"> -->
-                    <img src="{{ journal_detail.journal_image }}" alt="">
+                    {% if journal.journal_image %}
+                    <img src="{{ journal.journal_image.url }}" alt="Journal image">
+                    {% else %}
+                    <img src="{% static 'images/20241022_143310.jpg' %}" alt="Default image">
+                    {% endif %}
                     <p>{{ journal_detail.journal_content }}</p>
                     <p>Journal writen at {{ journal_detail.created_at }}</p>
                     <a href="#" class="text-decoration-none text-purple fw-bold">Edit</a>
