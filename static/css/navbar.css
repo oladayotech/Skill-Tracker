@@ -1,72 +1,36 @@
-/* Fade transition effect */
+/* Smooth transition */
 body {
-    background-color: #ffffff;
-    color: black;
     transition: background-color 0.5s ease, color 0.5s ease;
-}
-
-body.dark-mode {
-    background-color: #2e2e2e;
-    color: #ffffff;
-    transition: background-color 0.5s ease, color 0.5s ease;
-}
-
-.navbar {
-    background-color: #102ea8;
-    color: white;
-    position: relative;
-    z-index: 999;
-}
-
-/* Dark Mode Navbar */
-body.dark-mode .navbar {
-    background-color: #333333;
-    color: white;
-}
-
-.menu-links a {
-    color: white;
-    text-decoration: none;
-    margin-right: 20px;
-    transition: color 0.5s ease;
-}
-
-/* Dark Mode Links */
-body.dark-mode .menu-links a {
-    color: #dddddd;
-}
-
-.menu-links a:hover {
-    text-decoration: underline;
-}
-
-
-/* Moon & Sun Icons */
-.moon-sun-icons {
-    background-image: url('moon-icon.png'); /* Default icon */
-    background-size: cover;
-    transition: background-image 0.3s ease;
-}
-
-.moon-icon {
-    background-image: url('moon-icon.png');
-}
-
-.sun-icon {
-    background-image: url('sun-icon.png');
-}
-
-/* Mobile & Desktop Toggles */
-.w-4 {
-    position: absolute;
-    left: 0;
-    transition: transform 0.3s ease-in-out;
-}
-
-#mobile-menu {
-    position: absolute;
-    top: 64px; /* or match your navbar height */
+  }
+  
+  body.dark-mode {
+    background-color: #1e1e1e;
+    color: #f4f4f4;
+  }
+  
+  /* Ensure navbar blends in well with both modes */
+  nav {
+    transition: background-color 0.4s ease;
+  }
+  
+  body.dark-mode nav {
+    background-color: rgba(30, 30, 30, 0.9);
+  }
+  
+  #mobile-menu a,
+  nav a {
+    transition: color 0.3s ease;
+  }
+  
+  /* Optional hover effect */
+  a:hover {
+    color: #7c3aed;
+  }
+  
+  /* Mobile menu placement */
+  #mobile-menu {
+    top: 64px;
     left: 0;
     right: 0;
-    z-index: 60; /* higher than navbar z-50 */
   }
+  

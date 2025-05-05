@@ -58,4 +58,151 @@
         <a href="https://github.com/oladayotech" class="footer-link" target="_blank">Contact</a>
     </footer>
 </body>
+</html>{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Responsive Navbar with Dark Mode</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-transparent backdrop-blur-md shadow-md p-4 flex items-center justify-between fixed w-full z-50">
+    <!-- Logo and Title -->
+    <div class="flex items-center space-x-3">
+      <img src="{% static 'images/ChatGPT Image Apr 22, 2025, 07_31_14 PM1.png' %}" class="h-10 w-10" alt="Logo">
+      <div class="text-2xl font-bold">Skill Tracker</div>
+    </div>
+
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex items-center space-x-6">
+      
+      {% if user.is_authenticated %}
+      <a href="{% url 'dashboard' %}" class="hover:text-purple-500">Home</a>
+      <a href="{% url 'about' %}" class="hover:text-purple-500">About</a>
+      <a href="{% url 'journal' %}" class="hover:text-purple-500">Journal</a>
+      <!-- <a href="#" class="hover:text-blue-500">Contact</a> -->
+      <a href="{% url 'logout' %}" class="hover:text-purple-500">Logout</a>
+      {% else %}
+      <a href="{% url 'signup' %}" class="hover:text-purple-500">Sign Up</a>
+      <a href="{% url 'login' %}" class="hover:text-purple-500">Login</a>
+      {% endif %}
+        
+
+      <!-- Dark Mode Toggle (Desktop) -->
+      <!-- Dark Mode Toggle (Desktop) -->
+      <button id="dark-toggle" class="ml-auto">
+        <img id="dark-icon-desktop" src="{% static 'images/moon-icon.png' %}" alt="Dark Mode" class="w-6 h-6">
+      </button>
+    </div>
+
+    <!-- Mobile Hamburger + Toggle -->
+    <div class="md:hidden flex items-center space-x-2">
+      <button id="menu-toggle" class="focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+             xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
+      <!-- Dark Mode Toggle (Mobile) -->
+      <button id="dark-toggle-mobile" class="ml-2">
+        <img id="dark-icon-mobile" src="{% static 'images/moon-icon.png' %}" alt="Dark Mode" class="w-6 h-6">
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white/80 backdrop-blur-md shadow-md space-y-4 p-4 mt-20 z-60">
+
+    {% if user.is_authenticated %}
+    <a href="{% url 'dashboard' %}" class="block hover:text-purple-500">Home</a>
+    <a href="{% url 'about' %}" class="block hover:text-purple-500">About</a>
+    <a href="{% url 'journal' %}" class="block hover:text-purple-500">Journal</a>
+    <!-- <a href="#" class="block hover:text-blue-500">Contact</a> -->
+    <a href="{% url 'logout' %}" class="block hover:text-purple-500">Logout</a>
+    {% else %}
+    <a href="{% url 'signup' %}" class="block hover:text-purple-500">Signup</a>
+    <a href="{% url 'login' %}" class="block hover:text-purple-500">Login</a>
+    {% endif %}
+      
+  </div>
+
+  <!-- JavaScript for Menu and Dark Mode -->
+  <script>
+    const desktopIcon = document.getElementById('dark-icon-desktop');
+    const mobileIcon = document.getElementById('dark-icon-mobile');
+
+    // Enable Dark Mode
+    function enableDarkMode() {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('darkMode', 'enabled');
+      updateIcons(true);
+    }
+
+    // Disable Dark Mode
+    function disableDarkMode() {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('darkMode', 'disabled');
+      updateIcons(false);
+    }
+
+    // Update Icons
+    function updateIcons(isDarkMode) {
+      const moon = "{% static 'images/moon-icon.png' %}";
+      const sun = "{% static 'images/sun-icon.png' %}";
+
+      desktopIcon.src = isDarkMode ? moon : sun;
+      mobileIcon.src = isDarkMode ? moon : sun;
+    }
+
+    // Load preference
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      enableDarkMode();
+    } else {
+      disableDarkMode();
+    }
+
+    // Toggle handlers
+    document.getElementById('dark-toggle').addEventListener('click', () => {
+      document.body.classList.contains('dark-mode') ? disableDarkMode() : enableDarkMode();
+    });
+
+    document.getElementById('dark-toggle-mobile').addEventListener('click', () => {
+      document.body.classList.contains('dark-mode') ? disableDarkMode() : enableDarkMode();
+    });
+    const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  let menuOpen = false;
+
+  menuToggle.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (
+      menuOpen &&
+      !mobileMenu.contains(e.target) &&
+      !menuToggle.contains(e.target)
+    ) {
+      mobileMenu.classList.add('hidden');
+      menuOpen = false;
+    }
+  });
+
+  window.addEventListener('scroll', () => {
+    if (menuOpen) {
+      mobileMenu.classList.add('hidden');
+      menuOpen = false;
+    }
+  });
+  </script>
+
+</body>
 </html>
