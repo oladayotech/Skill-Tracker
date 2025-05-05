@@ -1,111 +1,35 @@
-/* General styles */
-body {
-    background-color: #102ea8;
+/* Headings */
+.section-heading {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Custom list with emojis or icons */
+.custom-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.custom-list li {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+/* Adjust text appearance */
+p.lead {
+    font-size: 1.15rem;
+    line-height: 1.6;
+}
+
+/* Headings contrast for dark mode */
+h1, h2, h4 {
     color: white;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Logo and navbar styles */
-/* .logo {
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
-    padding: 5px;
-}
-
-.nav-h2 {
-    color: white;
-    font-size: 35px;
-    margin: 0;
-}
-
-.nav-link a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.nav-link a:hover {
-    color: #dcdcdc;
-} */
-
-/* Footer */
-.footer {
-    background-color: #0c245f;
-    color: white;
-    padding: 1rem 0;
-    transition: background-color 0.4s, color 0.4s;
-}
-
-.footer-link {
-    text-decoration: none;
-    color: white;
-    margin: 0 5px;
-    transition: color 0.3s;
-}
-
-.footer-link:hover {
-    color: #cce3ff;
-}
-
-/* Transition for theme switch */
-body, .nav-h2, .nav-link a, footer, .footer-link, h4, h2, p {
-    transition: background-color 0.4s, color 0.4s;
-}
-
-/* Light mode */
-body.light-mode {
-    background-color: #ffffff;
-    color: #1a1a1a;
-}
-
-body.light-mode .nav-h2,
-body.light-mode .nav-link a,
-body.light-mode footer,
-body.light-mode .footer-link {
-    color: #1a1a1a;
-}
-
-body.light-mode .nav-link a:hover,
-body.light-mode .footer-link:hover {
-    color: #333;
-}
-
-body.light-mode .form-check-label {
-    color: #1a1a1a;
-}
-
-body.light-mode .footer {
-    background-color: #f1f1f1;
-    color: #1a1a1a;
-}
-
-/* Toggle switch styling */
-.form-check-input {
-    cursor: pointer;
-    width: 50px;
-    height: 25px;
-    background-color: #ccc;
-}
-
-.form-check-input:checked {
-    background-color: #0d6efd;
-    border-color: #0d6efd;
-}
-
-/* About section */
-.container h4 {
-    margin-top: 20px;
-    font-weight: bold;
-}
-
-.container p, .container li {
-    margin-bottom: 15px;
-    font-size: 1.05rem;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    img {
+        width: 100%;
+    }
 }
