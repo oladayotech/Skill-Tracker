@@ -8,6 +8,3 @@ class Journal(models.Model):
     journal_content = models.TextField()
     # journal_image = models.ImageField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    
-    # def __str__(self):
-    #     return self.user
