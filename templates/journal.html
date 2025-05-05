@@ -121,17 +121,19 @@
     {% if journal_list %}
     <div class="card p-4">
       {% for journal in journal_list %}
-      <h5>Yesterday</h5>
-      <a href="journal-details/{{ journal.id }}">
-        <div class="journal-entry mt-3 mb-4">
-            <img src="{% static 'images/20241022_143310.jpg' %}" alt="Journal image">
-            <div class="flex-grow-1">
-              <p>{{ journal.journal_content }}</p>
-              <a href="#" class="text-decoration-none text-purple fw-bold">Edit</a>
-            </div>
+      <div class="journal-entry mt-4">
+        {% if journal.journal_image %}
+          <img src="{{ journal.journal_image.url }}" alt="Journal image">
+        {% else %}
+          <img src="{% static 'images/default.jpg' %}" alt="Default image">
+        {% endif %}
+        <div>
+          <p class="fw-semibold text-dark">{{ journal.created_at|date:"F j, Y, g:i a" }}</p>
+          <p>{{ journal.journal_content }}</p>
+          <a href="#" class="text-decoration-none text-purple fw-bold">Edit</a>
         </div>
-      </a>
-      {% endfor %}
+      </div>
+    {% endfor %}
     </div>
     {% else %}
     <p class="text-muted text-center">No journal entries yet.</p>
