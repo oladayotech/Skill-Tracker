@@ -10,16 +10,24 @@
 </head>
 <body>
     <!-- navbar.html -->
-    {% include 'navbar.html' %}
+     <div>
+        {% include 'navbar.html' %}
+     </div>
 
     <div>
         <div>
-            <div>
-                <h2>Journal Details</h2>
-                <div>
-                    <h3>John</h3>
-                    <!-- <img src="{{ journal_detail.journal_image }}" alt=""> -->
+            <div class="">
+                <div class="">
+                    <h2>Journal Details</h2>
+                    <h2>Journal Details</h2>
+                    <h2>Journal Details</h2>
+                    <h2>Journal Details</h2>
+                    <h2>Journal Details</h2>
+                    <!-- <img src="{% static 'images/20241022_143310.jpg' %}" alt="Journal image"> -->
+                    <img src="{{ journal_detail.journal_image }}" alt="">
                     <p>{{ journal_detail.journal_content }}</p>
+                    <p>{{ journal_detail.created_at }}</p>
+                    <a href="#" class="text-decoration-none text-purple fw-bold">Edit</a>
                 </div>
             </div>
         </div>

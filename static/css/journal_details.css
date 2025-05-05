@@ -1,4 +1,15 @@
+.journal-entry {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
 
+  .journal-entry img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
 
 /* Footer Theme */
 .footer {
