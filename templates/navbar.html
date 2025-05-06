@@ -68,7 +68,7 @@
   <nav class="navbar navbar-expand-lg bg-dark-purple shadow-sm">
     <div class="container">
       
-      <a class="navbar-brand fw-bold d-flex align-items-center gap-2 text-light-purple" href="#">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2 text-light-purple" href="{% url 'dashboard' %}">
         <i class="bi bi-graph-up-arrow text-purple" style="font-size: 1.5rem;"></i>
         <span class="ms-2">SkillTracker.</span>
       </a>
@@ -80,8 +80,9 @@
       <div class="collapse navbar-collapse" id="navItems">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item mx-2"><a class="nav-link text-light-purple" href="{% url 'dashboard' %}">Home</a></li>
-          <li class="nav-item mx-2"><a class="nav-link text-light-purple" href="{% url 'about' %}">About</a></li>
+          <li class="nav-item mx-2"><a class="nav-link text-light-purple" href="{% url 'skills' %}">Skills</a></li>
           <li class="nav-item mx-2"><a class="nav-link text-light-purple" href="{% url 'journal' %}">Journal</a></li>
+          <li class="nav-item mx-2"><a class="nav-link text-light-purple" href="{% url 'about' %}">About</a></li>
         </ul>
         <div class="d-flex">
           <a href="login" class="btn btn-outline-purple me-2">Login</a>

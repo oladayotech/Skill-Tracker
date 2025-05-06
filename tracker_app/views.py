@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 from .models import Journal
 from .quote_generator import Quote_Selector
@@ -70,15 +71,29 @@ def user_logout(request):
     logout(request)
     return redirect('home')
 
+def skills(request):
+    return render(request, 'skills.html')
+
 @login_required
 def dashboard(request):
     today = date.today()
-    journal_count = Journal.objects.filter(created_at=today).count()
+    journal_count = Journal.objects.filter(created_at__date=today).count()
     # coding_hours = request.user.profile.get_today_hours()
 
     ranges = random.randint(0,8)
     quote = Quote_Selector(ranges)
     return render(request, 'dashboard.html', {'quote':quote, 'journal_count':journal_count})
+
+def dashboard_data(request):
+    today = date.today()
+
+    journal_count = Journal.objects.filter(created_at__date=today).count()
+    # coding_hours = request.user.profile.get_today_hours()  # Replace with actual logic
+
+    return JsonResponse({
+        'journal_count': journal_count,
+        # 'coding_hours': coding_hours,
+    })
 
 def about(request):
     return render(request, 'about.html')
