@@ -1,11 +1,21 @@
 body.body {
-  /* background-color: #1e1f3d; dark purple background */
+  background-color: #1a1b35; /* slightly darker */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #e0e0f0;
 }
 
+.heading-bg {
+  /* background-color: #2b275a; slightly darker purple */
+  /* display: inline-block; */
+  /* padding: 2px 8px; */
+  /* border-radius: 8px;*/
+  color: #2b275a;
+  /* font-weight: 600; */
+  /* margin-bottom: 10px; */
+}
+
 .card {
-  background-color: #2d2f57;
+  background-color: #26284b; /* slightly darker */
   color: #e0e0f0;
   border-radius: 16px;
   border: none;
@@ -21,7 +31,7 @@ h1, h5, h6 {
 }
 
 a.text-primary {
-  color: #b388ff; /* lavender */
+  color: #b388ff;
   font-weight: 500;
   transition: color 0.2s ease-in-out;
 }
@@ -30,8 +40,22 @@ a.text-primary:hover {
   color: #d1b3ff;
 }
 
+a.text-purple {
+  color: #b388ff;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+}
+
+a.text-purple:hover {
+  color: #d1b3ff;
+}
+
+.text-purple {
+  color: #b388ff !important;
+}
+
 footer {
-  background-color: #161629;
+  background-color: #141427; /* darker */
   color: #dcd0ff;
 }
 
@@ -49,8 +73,4 @@ footer {
 blockquote {
   border-left: 4px solid #b388ff;
   padding-left: 15px;
-}
-
-.text-purple {
-  color: #b388ff !important;
 }
