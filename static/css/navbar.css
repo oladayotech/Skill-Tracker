@@ -1,36 +1,36 @@
-/* Smooth transition */
-body {
-    transition: background-color 0.5s ease, color 0.5s ease;
+.bg-dark-purple {
+    background-color: #1e1f3d; /* deep purple */
   }
   
-  body.dark-mode {
-    background-color: #1e1e1e;
-    color: #f4f4f4;
+  .text-light-purple {
+    color: #dcd0ff !important;
   }
   
-  /* Ensure navbar blends in well with both modes */
-  nav {
-    transition: background-color 0.4s ease;
+  .text-light-purple:hover {
+    color: #ffffff !important;
   }
   
-  body.dark-mode nav {
-    background-color: rgba(30, 30, 30, 0.9);
+  .btn-purple {
+    background-color: #6f48b1;
+    color: #fff;
+    border: none;
   }
   
-  #mobile-menu a,
-  nav a {
-    transition: color 0.3s ease;
+  .btn-purple:hover {
+    background-color: #7f5dc9;
   }
   
-  /* Optional hover effect */
-  a:hover {
-    color: #7c3aed;
+  .btn-outline-purple {
+    border: 1px solid #b388ff;
+    color: #b388ff;
+    background-color: transparent;
   }
   
-  /* Mobile menu placement */
-  #mobile-menu {
-    top: 64px;
-    left: 0;
-    right: 0;
+  .btn-outline-purple:hover {
+    background-color: #b388ff;
+    color: #1e1f3d;
   }
   
+  .text-light-purple i {
+    color: #b388ff !important; /* or use same color as text-light-purple */
+  }

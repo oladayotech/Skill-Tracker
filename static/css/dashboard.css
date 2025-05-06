@@ -1,69 +1,56 @@
 body.body {
-    background-color: #f5f7fa;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .hero-banner {
-    height: 60vh;
-    background: url('/static/images/dashboard-bg.jpg') no-repeat center center/cover;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .gradient-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.3));
-    z-index: 0;
-  }
-  
-  .typewriter {
-    overflow: hidden;
-    white-space: nowrap;
-    animation: typing 3s steps(40, end);
-    border-right: 3px solid rgba(255,255,255,0.75);
-  }
-  
-  @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-  }
-  
-  .card-hover {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 12px;
-    border: none;
-  }
-  
-  .card-hover:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  footer {
-    background-color: #212529;
-    color: #ffffff;
-  }
-  
-  .footer-link {
-    color: #ffffff;
-    text-decoration: none;
-    margin: 0 5px;
-  }
-  
-  .footer-link:hover {
-    text-decoration: underline;
-  }
-  
-  a.text-primary {
-    font-weight: 500;
-    transition: color 0.2s ease-in-out;
-  }
-  
-  a.text-primary:hover {
-    color: #0a58ca;
-  }
-  
+  /* background-color: #1e1f3d; dark purple background */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #e0e0f0;
+}
+
+.card {
+  background-color: #2d2f57;
+  color: #e0e0f0;
+  border-radius: 16px;
+  border: none;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(106, 90, 205, 0.4); /* soft purple glow */
+}
+
+h1, h5, h6 {
+  color: #e0e0f0;
+}
+
+a.text-primary {
+  color: #b388ff; /* lavender */
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+}
+
+a.text-primary:hover {
+  color: #d1b3ff;
+}
+
+footer {
+  background-color: #161629;
+  color: #dcd0ff;
+}
+
+.footer-link {
+  color: #dcd0ff;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+  color: #f5e1ff;
+}
+
+blockquote {
+  border-left: 4px solid #b388ff;
+  padding-left: 15px;
+}
+
+.text-purple {
+  color: #b388ff !important;
+}

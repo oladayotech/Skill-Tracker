@@ -4,6 +4,9 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from .models import Journal
+from .quote_generator import Quote_Selector
+
+import random
 
 # Create your views here.
 def home(request):
@@ -69,7 +72,9 @@ def user_logout(request):
 @login_required
 def dashboard(request):
     context = request.user.username
-    return render(request, 'dashboard.html', {'context':context})
+    ranges = random.randint(0,8)
+    quote = Quote_Selector(ranges)
+    return render(request, 'dashboard.html', {'context':context, 'quote':quote})
 
 def about(request):
     return render(request, 'about.html')
