@@ -7,6 +7,7 @@ from .models import Journal
 from .quote_generator import Quote_Selector
 
 import random
+from datetime import date
 
 # Create your views here.
 def home(request):
@@ -71,10 +72,13 @@ def user_logout(request):
 
 @login_required
 def dashboard(request):
-    context = request.user.username
+    today = date.today()
+    journal_count = Journal.objects.filter(created_at=today).count()
+    # coding_hours = request.user.profile.get_today_hours()
+
     ranges = random.randint(0,8)
     quote = Quote_Selector(ranges)
-    return render(request, 'dashboard.html', {'context':context, 'quote':quote})
+    return render(request, 'dashboard.html', {'quote':quote, 'journal_count':journal_count})
 
 def about(request):
     return render(request, 'about.html')

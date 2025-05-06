@@ -55,9 +55,9 @@
 
       <div class="col-md-4">
         <div class="card p-3 card-hover text-purple">
-          <h6>Priority Rating</h6>
-          <p class="display-6">8</p>
-          <p>Focus Score</p>
+          <h6>Journal Entries</h6>
+          <p class="display-6">{{ journal_count }}</p>
+          <p>Today</p>
         </div>
       </div>
     </div>
@@ -120,6 +120,15 @@
         }
       }
     });
+
+    setInterval(() => {
+      fetch('/dashboard/data/')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('codingHours').textContent = data.coding_hours;
+          document.getElementById('journalCount').textContent = data.journal_count;
+        });
+    }, 30000); // every 30 seconds
   </script>  
 
 </body>
