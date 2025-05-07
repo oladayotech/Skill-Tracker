@@ -84,6 +84,7 @@ def dashboard(request):
     quote = Quote_Selector(ranges)
     return render(request, 'dashboard.html', {'quote':quote, 'journal_count':journal_count})
 
+@login_required
 def dashboard_data(request):
     today = date.today()
 
