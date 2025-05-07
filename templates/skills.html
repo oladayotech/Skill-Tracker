@@ -1,27 +1,26 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Learning Tracker</title>
-  <link rel="stylesheet" href="{% static 'css/skills.css' %}">
+  <link rel="stylesheet" href="skills.css" />
 </head>
 <body>
   <div class="container">
 
     <!-- Entry Form -->
-    <section class="entry">
+    <section class="entry-form">
       <h2>What did you learn today?</h2>
       <input type="text" placeholder="Learned about Django models" id="entryInput" />
-      <div class="row">
+      <div class="file-action">
         <input type="file" id="fileUpload" />
-        <button id="addEntry">Add Entry</button>
+        <button class="add-btn" id="addEntry">Add Entry</button>
       </div>
     </section>
 
     <!-- Skill Filter -->
-    <section class="skills-filter">
+    <section class="filters">
       <label for="skills">Skills</label>
       <select id="skills">
         <option value="Backend">Backend</option>
@@ -62,7 +61,8 @@
     </section>
   </div>
 
-  <script src="{% static 'skills.js' %}"></script>
+  <!-- Correct order: load Chart.js first -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="skills.js"></script>
 </body>
 </html>
