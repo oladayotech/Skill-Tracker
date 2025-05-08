@@ -1,7 +1,52 @@
 /* Improved styling for learning tracker */
 
 body {
-    background-color: #1b1a2e;
+    /* background-color: #1b1a2e; */
+    background-color: #1e1f3d;
+        color: #e0e0f0;
+        font-family: 'Segoe UI', sans-serif;
+        padding: 20px;
+      }
+      
+      .container {
+        max-width: 1000px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+      }
+      
+      .entry, .skills-filter, .calendar, .progress, .chart, .log-entry {
+        background-color: #2b275a;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        transition: background-color 0.3s;
+      }
+      
+      input[type="text"], select {
+        background-color: #3c3970;
+        color: #fff;
+        border: 1px solid #555;
+      }
+      
+      .add-btn {
+        background: linear-gradient(to right, #6a5acd, #836fff);
+      }
+      
+      .calendar-cell.filled {
+        background-color: #6a5acd;
+      }
+      
+      .heatmap div {
+        background-color: #3a3764;
+      }
+      
+      .level-1 { background-color: #4c46a4; }
+      .level-2 { background-color: #5f56c0; }
+      .level-3 { background-color: #7e75e5; }
+      .level-4 { background-color: #9d91f0; }
+      ;
     color: #e0e0f0;
     font-family: 'Segoe UI', sans-serif;
     padding: 20px;
