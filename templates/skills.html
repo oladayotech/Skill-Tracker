@@ -5,13 +5,112 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Learning Tracker</title>
-  <link rel="stylesheet" href="{% static 'css/skills.css' %}" />
+  <!-- <link rel="stylesheet" href="{% static 'css/skills.css' %}" /> -->
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1e1b47;
+      color: #f5f5f5;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+      background-color: #2b275a;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    h1, h2, h3 {
+      text-align: center;
+      color: #f5f5f5;
+      margin-bottom: 20px;
+    }
+    #entryInput {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    #addEntry {
+      background: linear-gradient(to right, #6d28d9, #9333ea);
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      transition: background 0.3s ease;
+    }
+    #addEntry:hover {
+      background: linear-gradient(to right, #7c3aed, #a855f7);
+    }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      margin-top: 20px;
+    }
+    .calendar-cell {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      border-radius: 6px;
+      background-color: #4338ca;
+      color: white;
+      font-size: 13px;
+      padding: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      overflow-y: auto;
+    }
+    .calendar-cell:hover {
+      background-color: #4f46e5;
+    }
+    .calendar-cell.empty {
+      background-color: transparent;
+      cursor: default;
+    }
+    .log-list {
+      margin-top: 4px;
+      font-size: 11px;
+      text-align: left;
+      width: 100%;
+    }
+    .log-list div {
+      margin-bottom: 2px;
+      line-height: 1.2;
+      background-color: rgba(255,255,255,0.1);
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    #heatmap {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      margin-top: 30px;
+    }
+    .heat-cell {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 4px;
+    }
+    .level-0 { background-color: #27264e; }
+    .level-1 { background-color: #4338ca; }
+    .level-2 { background-color: #5b21b6; }
+    .level-3 { background-color: #7c3aed; }
+    .level-4 { background-color: #a855f7; }
+  </style>
 </head>
 <body>
   <div class="container">
-
-
-    <!-- Entry Form -->
     <section class="entry-form">
       <h2>What did you learn today?</h2>
       <input type="text" placeholder="Learned about Django models" id="entryInput" />
@@ -21,7 +120,6 @@
       </div>
     </section>
 
-    <!-- Skill Filter -->
     <section class="filters">
       <label for="skills">Skills</label>
       <select id="skills">
@@ -31,40 +129,124 @@
       </select>
     </section>
 
-    <!-- Calendar -->
     <section class="calendar">
       <h3>May</h3>
       <div class="days">
         <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
       </div>
-      <div class="grid" id="calendarGrid"></div>
+      <div class="calendar-grid" id="calendarGrid"></div>
     </section>
 
-    <!-- Progress Section -->
     <section class="progress">
       <h3>Progress</h3>
       <div class="heatmap" id="heatmap"></div>
     </section>
 
-    <!-- Skill Pie Chart -->
     <section class="chart">
       <canvas id="skillChart" width="200" height="200"></canvas>
     </section>
-
-    <!-- Log Entry Card -->
-    <section class="log-entry">
-      <p class="date">May 6, 2024</p>
-      <p class="desc"><strong>Practiced JavaScript DOM manipulation</strong></p>
-      <p class="tag">Frontend <a href="#">github.com/username/repo</a></p>
-      <div class="actions">
-        <button>Edit</button>
-        <button>Delete</button>
-      </div>
-    </section>
   </div>
 
-  <!-- Correct order: load Chart.js first -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="{% static 'js/skills.js' %}"></script>
+  <script>
+    const addEntryBtn = document.getElementById('addEntry');
+    const entryInput = document.getElementById('entryInput');
+    const calendarGrid = document.getElementById('calendarGrid');
+    const heatmap = document.getElementById('heatmap');
+
+    const dayLogs = {};
+    let selectedDay = null;
+
+    addEntryBtn.addEventListener('click', () => {
+      const entry = entryInput.value.trim();
+      if (entry && selectedDay) {
+        if (!dayLogs[selectedDay]) dayLogs[selectedDay] = [];
+        dayLogs[selectedDay].push(entry);
+        updateDayLogs(selectedDay);
+        entryInput.value = '';
+      } else if (!selectedDay) {
+        alert('Please select a date on the calendar first.');
+      }
+    });
+
+    function generateCalendar() {
+      calendarGrid.innerHTML = '';
+      const daysInMay = 31;
+      const startDay = 3;
+
+      for (let i = 0; i < startDay; i++) {
+        const emptyCell = document.createElement('div');
+        emptyCell.className = 'calendar-cell empty';
+        calendarGrid.appendChild(emptyCell);
+      }
+
+      for (let day = 1; day <= daysInMay; day++) {
+        const cell = document.createElement('div');
+        cell.className = 'calendar-cell';
+        cell.innerHTML = `<strong>${day}</strong><div class="log-list" id="log-${day}"></div>`;
+
+        cell.addEventListener('click', () => {
+          selectedDay = day;
+          document.querySelectorAll('.calendar-cell').forEach(c => c.classList.remove('selected'));
+          cell.classList.add('selected');
+        });
+
+        calendarGrid.appendChild(cell);
+      }
+    }
+
+    function updateDayLogs(day) {
+      const logContainer = document.getElementById(`log-${day}`);
+      if (!logContainer) return;
+      logContainer.innerHTML = '';
+      dayLogs[day].forEach(log => {
+        const item = document.createElement('div');
+        item.textContent = log;
+        logContainer.appendChild(item);
+      });
+    }
+
+    function generateHeatmap() {
+      heatmap.innerHTML = '';
+      const cells = 42;
+      for (let i = 0; i < cells; i++) {
+        const cell = document.createElement('div');
+        const intensity = Math.floor(Math.random() * 5);
+        cell.className = `heat-cell level-${intensity}`;
+        heatmap.appendChild(cell);
+      }
+    }
+
+    function generatePieChart() {
+      const ctx = document.getElementById('skillChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Backend', 'Frontend', 'DevOps'],
+          datasets: [{
+            data: [30, 50, 20],
+            backgroundColor: ['#3b82f6', '#10b981', '#f59e0b'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          cutout: '70%',
+          plugins: {
+            legend: {
+              position: 'right',
+              labels: {
+                color: '#ccc',
+                boxWidth: 12
+              }
+            }
+          }
+        }
+      });
+    }
+
+    generateCalendar();
+    generateHeatmap();
+    generatePieChart();
+  </script>
 </body>
 </html>
