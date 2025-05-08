@@ -1,21 +1,48 @@
-const addEntryBtn = document.getElementById('addEntry');
-const entryInput = document.getElementById('entryInput');
-const calendarGrid = document.getElementById('calendarGrid');
-const heatmap = document.getElementById('heatmap');
+const modalOverlay = document.getElementById('modalOverlay');
+const modalText = document.getElementById('modalText');
+const saveLogBtn = document.getElementById('saveLogBtn');
+let activeDay = null;
 
-const dayLogs = {};
+const dayLogs = JSON.parse(localStorage.getItem('dayLogs')) || {};
 
-addEntryBtn.addEventListener('click', () => {
-  const entry = entryInput.value.trim();
-  if (entry) {
-    const today = new Date().getDate();
-    if (!dayLogs[today]) dayLogs[today] = [];
-    dayLogs[today].push(entry);
-    updateDayLogs(today);
-    entryInput.value = '';
-  }
-});
+// Show modal
+function showModal(day) {
+  activeDay = day;
+  modalOverlay.style.display = 'flex';
+  modalText.value = '';
+}
 
+// Hide modal
+function hideModal() {
+  modalOverlay.style.display = 'none';
+}
+
+// Save log to memory and localStorage
+function saveLog() {
+  const text = modalText.value.trim();
+  if (!text) return;
+
+  if (!dayLogs[activeDay]) dayLogs[activeDay] = [];
+  dayLogs[activeDay].push(text);
+
+  localStorage.setItem('dayLogs', JSON.stringify(dayLogs));
+  updateDayLogs(activeDay);
+  hideModal();
+}
+
+// Update logs shown inside calendar day
+function updateDayLogs(day) {
+  const logContainer = document.getElementById(`log-${day}`);
+  if (!logContainer) return;
+  logContainer.innerHTML = '';
+  dayLogs[day]?.forEach(log => {
+    const item = document.createElement('div');
+    item.textContent = log;
+    logContainer.appendChild(item);
+  });
+}
+
+// Generate calendar UI
 function generateCalendar() {
   calendarGrid.innerHTML = '';
   const daysInMay = 31;
@@ -32,67 +59,19 @@ function generateCalendar() {
     cell.className = 'calendar-cell filled';
     cell.innerHTML = `<strong>${day}</strong><div class="log-list" id="log-${day}"></div>`;
 
-    cell.addEventListener('click', () => {
-      const entry = prompt(`Add log for May ${day}:`);
-      if (entry) {
-        if (!dayLogs[day]) dayLogs[day] = [];
-        dayLogs[day].push(entry);
-        updateDayLogs(day);
-      }
-    });
-
+    cell.addEventListener('click', () => showModal(day));
     calendarGrid.appendChild(cell);
+
+    updateDayLogs(day);
   }
 }
 
-function updateDayLogs(day) {
-  const logContainer = document.getElementById(`log-${day}`);
-  if (!logContainer) return;
-  logContainer.innerHTML = '';
-  dayLogs[day].forEach(log => {
-    const item = document.createElement('div');
-    item.textContent = log;
-    logContainer.appendChild(item);
-  });
-}
+// Event listeners
+modalOverlay.addEventListener('click', (e) => {
+  if (e.target === modalOverlay) hideModal();
+});
 
-function generateHeatmap() {
-  heatmap.innerHTML = '';
-  const cells = 42;
-  for (let i = 0; i < cells; i++) {
-    const cell = document.createElement('div');
-    const intensity = Math.floor(Math.random() * 5);
-    cell.className = `heat-cell level-${intensity}`;
-    heatmap.appendChild(cell);
-  }
-}
-
-function generatePieChart() {
-  const ctx = document.getElementById('skillChart').getContext('2d');
-  new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: ['Backend', 'Frontend', 'DevOps'],
-      datasets: [{
-        data: [30, 50, 20],
-        backgroundColor: ['#3b82f6', '#10b981', '#f59e0b'],
-        borderWidth: 0
-      }]
-    },
-    options: {
-      cutout: '70%',
-      plugins: {
-        legend: {
-          position: 'right',
-          labels: {
-            color: '#ccc',
-            boxWidth: 12
-          }
-        }
-      }
-    }
-  });
-}
+saveLogBtn.addEventListener('click', saveLog);
 
 generateCalendar();
 generateHeatmap();

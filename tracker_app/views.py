@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from rest_framework import viewsets
+from .models import DailyLog
+from .serializers import DailyLogSerializer
 
 from .models import Journal
 from .quote_generator import Quote_Selector
