@@ -1,6 +1,7 @@
 const modalOverlay = document.getElementById('modalOverlay');
 const modalText = document.getElementById('modalText');
 const saveLogBtn = document.getElementById('saveLogBtn');
+const calendarGrid = document.getElementById('calendarGrid');
 let activeDay = null;
 
 const dayLogs = JSON.parse(localStorage.getItem('dayLogs')) || {};
@@ -17,6 +18,21 @@ function hideModal() {
   modalOverlay.style.display = 'none';
 }
 
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+      cookie = cookie.trim();
+      if (cookie.startsWith(name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+
 // Save log to memory and localStorage
 function saveLog() {
   const text = modalText.value.trim();
@@ -28,6 +44,19 @@ function saveLog() {
   localStorage.setItem('dayLogs', JSON.stringify(dayLogs));
   updateDayLogs(activeDay);
   hideModal();
+  fetch('/api/logs/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': getCookie('csrftoken'),
+    },
+    body: JSON.stringify({
+      day: activeDay,
+      month: 'May',
+      year: 2025,
+      log_text: text,
+    }),
+  });
 }
 
 // Update logs shown inside calendar day
@@ -77,16 +106,6 @@ generateCalendar();
 generateHeatmap();
 generatePieChart();
 
-fetch('/api/logs/', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'X-CSRFToken': getCookie('csrftoken'),
-  },
-  body: JSON.stringify({
-    day: activeDay,
-    month: 'May',
-    year: 2025,
-    log_text: text,
-  }),
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') hideModal();
 });
