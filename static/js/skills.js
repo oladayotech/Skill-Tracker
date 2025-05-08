@@ -76,3 +76,17 @@ saveLogBtn.addEventListener('click', saveLog);
 generateCalendar();
 generateHeatmap();
 generatePieChart();
+
+fetch('/api/logs/', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-CSRFToken': getCookie('csrftoken'),
+  },
+  body: JSON.stringify({
+    day: activeDay,
+    month: 'May',
+    year: 2025,
+    log_text: text,
+  }),
+});

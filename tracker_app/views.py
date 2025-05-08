@@ -136,3 +136,7 @@ def journal_details(request, pk):
         return render(request, 'journal_details.html', {'journal_detail':journal_detail})
     else:
         return redirect('journal')
+    
+class DailyLogViewSet(viewsets.ModelViewSet):
+    queryset = DailyLog.objects.all()
+    serializer_class = DailyLogSerializer
