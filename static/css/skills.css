@@ -1,146 +1,114 @@
-/* Improved styling for learning tracker */
-
 body {
-    /* background-color: #1b1a2e; */
-    background-color: #1e1f3d;
-        color: #e0e0f0;
-        font-family: 'Segoe UI', sans-serif;
-        padding: 20px;
-      }
-      
-      .container {
-        max-width: 1000px;
-        margin: auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 24px;
-      }
-      
-      .entry, .skills-filter, .calendar, .progress, .chart, .log-entry {
-        background-color: #2b275a;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-        transition: background-color 0.3s;
-      }
-      
-      input[type="text"], select {
-        background-color: #3c3970;
-        color: #fff;
-        border: 1px solid #555;
-      }
-      
-      .add-btn {
-        background: linear-gradient(to right, #6a5acd, #836fff);
-      }
-      
-      .calendar-cell.filled {
-        background-color: #6a5acd;
-      }
-      
-      .heatmap div {
-        background-color: #3a3764;
-      }
-      
-      .level-1 { background-color: #4c46a4; }
-      .level-2 { background-color: #5f56c0; }
-      .level-3 { background-color: #7e75e5; }
-      .level-4 { background-color: #9d91f0; }
-      ;
-    color: #e0e0f0;
     font-family: 'Segoe UI', sans-serif;
+    background-color: #1e1b47;
+    color: #f5f5f5;
     padding: 20px;
   }
-  
+
   .container {
-    max-width: 1000px;
+    max-width: 900px;
     margin: auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
-  }
-  
-  .entry, .skills-filter, .calendar, .progress, .chart, .log-entry {
+    padding: 2rem;
     background-color: #2b275a;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    transition: background-color 0.3s;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   }
-  
-  input[type="text"], select {
-    background-color: #3c3970;
-    color: #fff;
-    border: 1px solid #555;
-    padding: 8px;
-    border-radius: 6px;
+
+  h1, h2 {
+    text-align: center;
+    color: #f5f5f5;
+    margin-bottom: 20px;
+  }
+
+  #entryInput {
     width: 100%;
-    margin-top: 6px;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    margin-bottom: 10px;
+    font-size: 16px;
   }
-  
-  .add-btn {
-    margin-top: 10px;
+
+  #addEntry {
+    background: linear-gradient(to right, #6d28d9, #9333ea);
+    color: white;
     padding: 10px 16px;
-    background: linear-gradient(to right, #6a5acd, #836fff);
     border: none;
     border-radius: 8px;
-    color: white;
-    font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s;
+    font-size: 16px;
+    width: 100%;
+    transition: background 0.3s ease;
   }
-  
-  .add-btn:hover {
-    background: linear-gradient(to right, #836fff, #6a5acd);
+
+  #addEntry:hover {
+    background: linear-gradient(to right, #7c3aed, #a855f7);
   }
-  
-  .grid {
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .calendar-cell {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 6px;
+    background-color: #4338ca;
+    color: white;
+    font-size: 13px;
+    padding: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    overflow-y: auto;
+  }
+
+  .calendar-cell:hover {
+    background-color: #4f46e5;
+  }
+
+  .calendar-cell.empty {
+    background-color: transparent;
+    cursor: default;
+  }
+
+  .log-list {
+    margin-top: 4px;
+    font-size: 11px;
+    text-align: left;
+    width: 100%;
+  }
+
+  .log-list div {
+    margin-bottom: 2px;
+    line-height: 1.2;
+    background-color: rgba(255,255,255,0.1);
+    padding: 2px 4px;
+    border-radius: 4px;
+  }
+
+  #heatmap {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 6px;
-    margin-top: 10px;
+    margin-top: 30px;
   }
-  
-  .calendar-cell {
-    width: 36px;
-    height: 36px;
-    background-color: #3b3e54;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 6px;
-    font-weight: bold;
-    transition: background-color 0.2s;
+
+  .heat-cell {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 4px;
   }
-  
-  .calendar-cell.filled {
-    background-color: #6a5acd;
-  }
-  
-  .calendar-cell.filled:hover {
-    background-color: #7e75e5;
-    cursor: pointer;
-  }
-  
-  .empty {
-    background-color: transparent;
-  }
-  
-  .heatmap div {
-    width: 12px;
-    height: 12px;
-    margin: 2px;
-    background-color: #3a3764;
-    border-radius: 3px;
-  }
-  
-  .level-1 { background-color: #4c46a4; }
-  .level-2 { background-color: #5f56c0; }
-  .level-3 { background-color: #7e75e5; }
-  .level-4 { background-color: #9d91f0; }
-  
-  .actions button:hover {
-    background-color: #5f56c0;
-    cursor: pointer;
-  }
+
+  .level-0 { background-color: #27264e; }
+  .level-1 { background-color: #4338ca; }
+  .level-2 { background-color: #5b21b6; }
+  .level-3 { background-color: #7c3aed; }
+  .level-4 { background-color: #a855f7; }
