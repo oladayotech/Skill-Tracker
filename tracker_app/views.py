@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from rest_framework import viewsets
 from .models import DailyLog
-from rest_framework.serializers import DailyLogSerializer
+from .serializers import DailyLogSerializer
 
 from .models import Journal
 from .quote_generator import Quote_Selector
