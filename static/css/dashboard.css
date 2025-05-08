@@ -4,16 +4,16 @@ body.body {
   color: #e0e0f0;
 }
 
-/* .heading-bg { */
+.heading-bg {
   /* background-color: #2b275a; slightly darker purple */
   /* display: inline-block; */
   /* padding: 2px 8px; */
   /* border-radius: 8px;*/
-  /* color: #2b275a !important; */
+  color: #2b275a !important;
   /* color: white; */
   /* font-weight: 600; */
   /* margin-bottom: 10px; */
-/* } */
+}
 
 .card {
   background-color: #26284b; /* slightly darker */
