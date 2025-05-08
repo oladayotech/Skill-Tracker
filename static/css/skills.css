@@ -1,126 +1,102 @@
-/* style.css */
+/* Improved styling for learning tracker */
+
 body {
-    background-color: #0d0f14;
-    color: #e5e5e5;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
+    background-color: #1b1a2e;
+    color: #e0e0f0;
+    font-family: 'Segoe UI', sans-serif;
     padding: 20px;
   }
   
   .container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
   }
   
-  .entry-form, .filters, .progress, .calendar, .chart, .log-entry {
-    background-color: #1a1d23;
+  .entry, .skills-filter, .calendar, .progress, .chart, .log-entry {
+    background-color: #2b275a;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    transition: background-color 0.3s;
   }
   
-  h2, h3 {
-    color: #ffffff;
-    margin-bottom: 10px;
-  }
-  
-  input[type="text"] {
-    width: 100%;
-    padding: 12px;
-    background-color: #2c2f36;
+  input[type="text"], select {
+    background-color: #3c3970;
     color: #fff;
-    border: none;
-    border-radius: 8px;
-  }
-  
-  .file-action {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-  
-  .upload-btn, .add-btn {
-    background-color: #2f80ed;
-    color: white;
-    padding: 10px 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  .upload-btn:hover, .add-btn:hover {
-    background-color: #1366d6;
-  }
-  
-  select {
+    border: 1px solid #555;
+    padding: 8px;
+    border-radius: 6px;
     width: 100%;
-    padding: 10px;
-    background-color: #2c2f36;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    margin-top: 10px;
+    margin-top: 6px;
   }
   
-  .heatmap, .days {
+  .add-btn {
+    margin-top: 10px;
+    padding: 10px 16px;
+    background: linear-gradient(to right, #6a5acd, #836fff);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .add-btn:hover {
+    background: linear-gradient(to right, #836fff, #6a5acd);
+  }
+  
+  .grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 6px;
     margin-top: 10px;
   }
   
-  .heatmap div, .days div {
-    width: 24px;
-    height: 24px;
-    background-color: #333;
-    border-radius: 4px;
-  }
-  
-  .weekdays span {
-    display: inline-block;
-    width: 24px;
-    text-align: center;
-    color: #aaa;
-  }
-  
-  .skill-bar {
-    height: 8px;
-    background: linear-gradient(to right, #2f80ed 33%, #56cc9d 33%, #bb6bd9 34%);
-    border-radius: 4px;
-    margin-top: 10px;
-  }
-  
-  canvas {
-    display: block;
-    margin: auto;
-    background-color: #1a1d23;
-    border-radius: 50%;
-  }
-  
-  .log-entry p {
-    margin: 6px 0;
-  }
-  
-  .log-entry .tag a {
-    color: #2f80ed;
-    text-decoration: none;
-  }
-  
-  .actions button {
-    background-color: #444;
+  .calendar-cell {
+    width: 36px;
+    height: 36px;
+    background-color: #3b3e54;
     color: #fff;
-    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 6px;
-    padding: 6px 12px;
-    margin-right: 10px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+  }
+  
+  .calendar-cell.filled {
+    background-color: #6a5acd;
+  }
+  
+  .calendar-cell.filled:hover {
+    background-color: #7e75e5;
     cursor: pointer;
   }
   
+  .empty {
+    background-color: transparent;
+  }
+  
+  .heatmap div {
+    width: 12px;
+    height: 12px;
+    margin: 2px;
+    background-color: #3a3764;
+    border-radius: 3px;
+  }
+  
+  .level-1 { background-color: #4c46a4; }
+  .level-2 { background-color: #5f56c0; }
+  .level-3 { background-color: #7e75e5; }
+  .level-4 { background-color: #9d91f0; }
+  
   .actions button:hover {
-    background-color: #666;
+    background-color: #5f56c0;
+    cursor: pointer;
   }
   
