@@ -98,6 +98,9 @@ def dashboard_data(request):
         'journal_count': journal_count,
         # 'coding_hours': coding_hours,
     })
+    
+def profile(request):
+    return render(request, 'profile.html')
 
 def about(request):
     return render(request, 'about.html')

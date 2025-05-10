@@ -11,6 +11,7 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('dashboard/data/', views.dashboard_data, name='dashboard-data'),
     path('about/', views.about, name='about'),
+    path('profile/', views.profile, name='profile'),
     path('journal/', views.journal, name='journal'),
     path('journal/journal-details/<int:pk>/', views.journal_details, name='journal-details'),
 ]
