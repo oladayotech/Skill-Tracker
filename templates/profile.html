@@ -107,9 +107,9 @@
       <!-- Profile Card -->
       <div class="col-lg-4">
         <div class="card p-4 text-center card-custom">
-          <img src="{% static 'images/20241022_143310.jpg' %}" alt="Profile Image" class="profile-img mb-3 mx-auto">
+          <img src="{% static 'images\download.png' %}" alt="Profile Image" class="profile-img mb-3 mx-auto">
           
-          {% if {{ request.user.first_name }} %}
+          {% if request.user.first_name %}
           <h5 class="mb-1">{{ request.user.first_name }} {{ request.user.last_name }}</h5>
           {% else %}
           <h5 class="mb-1">{{ request.user.username }}</h5>
