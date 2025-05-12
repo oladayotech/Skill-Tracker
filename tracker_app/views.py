@@ -78,6 +78,10 @@ def skills(request):
     return render(request, 'skills.html')
 
 @login_required
+def onboarding(request):
+    return render(request, 'onboarding.html')
+
+@login_required
 def dashboard(request):
     today = date.today()
     journal_count = Journal.objects.filter(created_at__date=today).count()
