@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <div>
+        <div>
+            <p>Hello {{ request.user.username }}!</p>
+            <p>Tell me a little about youself so we can start tracking your skills</p>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+  <footer class="text-center text-white py-4">
+    &copy; 2025 Built with 💜 by Abdulquahaar |
+    <a href="#" class="footer-link">Privacy</a> |
+    <a href="https://github.com/oladayotech" class="footer-link">GitHub</a>
+  </footer>
+</body>
+</html>
