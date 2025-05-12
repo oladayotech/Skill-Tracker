@@ -9,6 +9,7 @@ urlpatterns = [
     path('signup/', views.user_signup, name='signup'),
     path('skills/', views.skills, name='skills'),
     path('onboarding/', views.onboarding, name='onboarding'),
+    path('onboarding/role-selection/', views.role_selection, name='role-selection'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('dashboard/data/', views.dashboard_data, name='dashboard-data'),
     path('about/', views.about, name='about'),

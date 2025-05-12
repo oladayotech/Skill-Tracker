@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select a Role</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .role-card {
+            border: 2px solid #ccc;
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .role-card.selected {
+            border-color: #0d6efd;
+            background-color: #e7f1ff;
+        }
+
+        .role-card .icon {
+            font-size: 20px;
+            width: 30px;
+            text-align: center;
+        }
+
+        .role-card.selected .icon::after {
+            content: '\2713';
+            color: #0d6efd;
+        }
+
+        .search-bar {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        footer {
+            background-color: #2b2c47;;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="container">
+        <input type="text" class="form-control search-bar" placeholder="Find a role" id="roleSearch">
+
+        <div class="row" id="rolesContainer">
+            <!-- Roles inserted here by JavaScript -->
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <button onclick="window.location.href='/'" class="btn btn-outline-primary">&larr; Back</button>
+            <button class="btn btn-primary">Next &rarr;</button>
+        </div>
+    </div>
+
+    <footer class="text-center text-white py-4 mt-5">
+        &copy; 2025 Built with 💜 by Abdulquahaar |
+        <a href="#" class="footer-link text-white">Privacy</a> |
+        <a href="https://github.com/oladayotech" class="footer-link text-white">GitHub</a>
+    </footer>
+
+    <script>
+        const roles = [
+            "Cyber Security Engineer",
+            "Data Scientist",
+            "Automation Engineer",
+            "Machine Learning Engineer",
+            "Data Architect",
+            "Front End Developer",
+            "Data Analyst",
+            "Back End Developer / Engineer",
+            "IT Project Manager",
+            "Technology Consultant",
+            "Business Intelligence Analyst",
+            "Product Manager",
+            "Business / Management Analyst",
+            "Data Warehouse Developer",
+            "Statistician",
+            "Video Game Developer",
+            "Mainframe Developer",
+            "Marketing Analytics Specialist"
+        ];
+
+        const container = document.getElementById("rolesContainer");
+
+        roles.forEach(role => {
+            const col = document.createElement("div");
+            col.className = "col-md-4";
+            const card = document.createElement("div");
+            card.className = "role-card";
+            card.innerHTML = `<div class="icon">+</div><span>${role}</span>`;
+            card.addEventListener("click", () => {
+                card.classList.toggle("selected");
+            });
+            col.appendChild(card);
+            container.appendChild(col);
+        });
+
+        document.getElementById("roleSearch").addEventListener("input", function () {
+            const query = this.value.toLowerCase();
+            const cards = document.querySelectorAll(".role-card");
+            cards.forEach(card => {
+                const role = card.querySelector("span").textContent.toLowerCase();
+                card.parentElement.style.display = role.includes(query) ? "block" : "none";
+            });
+        });
+    </script>
+</body>
+
+</html>

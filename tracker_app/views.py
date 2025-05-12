@@ -81,6 +81,9 @@ def skills(request):
 def onboarding(request):
     return render(request, 'onboarding.html')
 
+def role_selection(request):
+    return render(request, 'role_selection.html')
+
 @login_required
 def dashboard(request):
     today = date.today()

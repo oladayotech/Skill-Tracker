@@ -3,24 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Skill Tracker Onboarding</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .header {
+            background-color: #2b2c47;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        .goal-card {
+            background-color: white;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        .goal-card:hover, .goal-card.active {
+            border-color: #2b2c47;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        .goal-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: #2b2c47;
+        }
+        .footer {
+            background-color: #2b2c47;
+            color: white;
+        }
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
     {% include 'navbar.html' %}
 
-    <div>
-        <div>
-            <p>Hello {{ request.user.username }}!</p>
-            <p>Tell me a little about youself so we can start tracking your skills</p>
+    <div class="header">
+        <h2>Hello {{ request.user.username }}!</h2>
+        <p>Tell me a little about yourself so we can start tracking your skills</p>
+    </div>
+
+    <div class="container my-5">
+        <div class="row text-center g-4">
+            <div class="col-md-3">
+                <div class="goal-card">
+                    <div class="goal-icon">🚀</div>
+                    <div>Start my career</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="goal-card">
+                    <div class="goal-icon">🔀</div>
+                    <div>Change my career</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="goal-card">
+                    <div class="goal-icon">📈</div>
+                    <div>Grow in my current role</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="goal-card">
+                    <div class="goal-icon">🔭</div>
+                    <div>Explore topics outside of work</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <button onclick="window.location.href='role-selection'" class="btn btn-primary px-4 py-2" style="background-color: #2b2c47; border: none;">
+                Next →
+            </button>
         </div>
     </div>
 
-
-    <!-- Footer -->
-  <footer class="text-center text-white py-4">
-    &copy; 2025 Built with 💜 by Abdulquahaar |
-    <a href="#" class="footer-link">Privacy</a> |
-    <a href="https://github.com/oladayotech" class="footer-link">GitHub</a>
-  </footer>
+    <footer class="footer text-center py-4">
+        &copy; 2025 Built with ❤️ by Abdulquahaar |
+        <a href="#" class="footer-link">Privacy</a> |
+        <a href="https://github.com/oladayotech" class="footer-link">GitHub</a>
+    </footer>
 </body>
 </html>
