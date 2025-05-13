@@ -44,7 +44,7 @@ def user_signup(request):
                 user = User.objects.create_user(username, email, password)
                 user.save()
                 login(request, user)
-                return redirect('dashboard')
+                return redirect('onboarding')
             except:
                 error_message = 'Error creating account'
                 return render(request, 'signup.html', {'error_message':error_message})
@@ -81,9 +81,11 @@ def skills(request):
 def onboarding(request):
     return render(request, 'onboarding.html')
 
+@login_required
 def role_selection(request):
     return render(request, 'role_selection.html')
 
+@login_required
 def learning_goals(request):
     return render(request, 'learning_goals.html')
 

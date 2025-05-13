@@ -23,3 +23,6 @@ class DailyLog(models.Model):
     year = models.IntegerField()
     log_text = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+    
+class Goal(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
