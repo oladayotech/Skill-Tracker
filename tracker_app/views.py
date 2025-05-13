@@ -110,8 +110,9 @@ def dashboard_data(request):
         'journal_count': journal_count,
         # 'coding_hours': coding_hours,
     })
-    
-def profile(request):
+
+@login_required   
+def profile(request, username):
     return render(request, 'profile.html')
 
 def about(request):
