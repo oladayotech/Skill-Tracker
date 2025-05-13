@@ -49,6 +49,7 @@
       color: #ccc;
       text-decoration: none;
     }
+
     .footer a:hover {
       text-decoration: underline;
     }
@@ -64,26 +65,27 @@
 
   <div class="container my-5">
     <div class="row text-center g-4">
+      <!-- Each goal card has a data-goal attribute to uniquely identify it -->
       <div class="col-md-3">
-        <div class="goal-card" onclick="selectGoal(this)">
+        <div class="goal-card" data-goal="start" onclick="selectGoal(this)">
           <div class="goal-icon">🚀</div>
           <div>Start my career</div>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="goal-card" onclick="selectGoal(this)">
+        <div class="goal-card" data-goal="change" onclick="selectGoal(this)">
           <div class="goal-icon">🔀</div>
           <div>Change my career</div>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="goal-card" onclick="selectGoal(this)">
+        <div class="goal-card" data-goal="grow" onclick="selectGoal(this)">
           <div class="goal-icon">📈</div>
           <div>Grow in my current role</div>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="goal-card" onclick="selectGoal(this)">
+        <div class="goal-card" data-goal="explore" onclick="selectGoal(this)">
           <div class="goal-icon">🔭</div>
           <div>Explore topics outside of work</div>
         </div>
@@ -91,7 +93,7 @@
     </div>
 
     <div class="text-center mt-5">
-      <button onclick="window.location.href='role-selection'" class="btn btn-primary px-4 py-2" style="background-color: #2b2c47; border: none;">
+      <button onclick="goToNextPage()" class="btn btn-primary px-4 py-2" style="background-color: #2b2c47; border: none;">
         Next →
       </button>
     </div>
@@ -104,10 +106,40 @@
   </footer>
 
   <script>
+    // Called when a card is clicked
     function selectGoal(selectedCard) {
       const allCards = document.querySelectorAll('.goal-card');
       allCards.forEach(card => card.classList.remove('active'));
+
+      // Add active class to clicked card
       selectedCard.classList.add('active');
+
+      // Save to localStorage
+      const selectedGoal = selectedCard.getAttribute('data-goal');
+      localStorage.setItem('selectedGoal', selectedGoal);
+    }
+
+    // Called on page load to restore selection
+    window.onload = function () {
+      const savedGoal = localStorage.getItem('selectedGoal');
+      if (savedGoal) {
+        const allCards = document.querySelectorAll('.goal-card');
+        allCards.forEach(card => {
+          if (card.getAttribute('data-goal') === savedGoal) {
+            card.classList.add('active');
+          }
+        });
+      }
+    };
+
+    // Optional: Redirect only if a goal is selected
+    function goToNextPage() {
+      const selectedGoal = localStorage.getItem('selectedGoal');
+      if (!selectedGoal) {
+        alert("Please select a goal first.");
+        return;
+      }
+      window.location.href = 'role-selection';
     }
   </script>
 </body>
