@@ -112,19 +112,6 @@ def profile(request, username):
 def about(request):
     return render(request, 'about.html')
 
-# def journal(request):
-#     if request.method == "POST":
-#         journal_content = request.POST['journal_content']
-#         journal_image = request.POST['journal_image']
-#         new_journal = Journal.objects.create(
-#             user = request.user,
-#             journal_content = journal_content,
-#             journal_image = journal_image,
-#         )
-#         new_journal.save()
-#     journal_list = Journal.objects.filter(user = request.user)
-#     return render(request, 'journal.html', {'journal_list':journal_list})
-
 def journal(request):
     if request.method == "POST":
         journal_content = request.POST.get('journal_content')

@@ -63,7 +63,7 @@
     {% include 'navbar.html' %}
 
     <div class="container">
-        <input type="text" class="form-control search-bar" placeholder="Find a role" id="roleSearch">
+        <input type="text" class="form-control search-bar" placeholder="Pick your Stack" id="roleSearch">
 
         <div class="row" id="rolesContainer">
             <!-- Roles inserted here by JavaScript -->
@@ -71,7 +71,7 @@
 
         <div class="d-flex justify-content-between mt-4">
             <button onclick="window.location.href='/onboarding'" class="btn btn-outline-primary">&larr; Back</button>
-            <button onclick="window.location.href='stacks'" class="btn btn-primary">Next &rarr;</button>
+            <button onclick="window.location.href='learning-goals'" class="btn btn-primary">Next &rarr;</button>
         </div>
     </div>
 
@@ -83,24 +83,24 @@
 
     <script>
         const roles = [
-            "Cyber Security Engineer",
-            "Data Scientist",
-            "Automation Engineer",
-            "Machine Learning Engineer",
-            "Data Architect",
-            "Front End Developer",
-            "Data Analyst",
-            "Back End Developer / Engineer",
-            "IT Project Manager",
-            "Technology Consultant",
-            "Business Intelligence Analyst",
-            "Product Manager",
-            "Business / Management Analyst",
-            "Data Warehouse Developer",
-            "Statistician",
-            "Video Game Developer",
-            "Mainframe Developer",
-            "Marketing Analytics Specialist"
+            "Html",
+            "Css",
+            "JavaScript",
+            "Python",
+            "Bootstrap",
+            "Tailwind-Css",
+            "ReactJs",
+            "Django",
+            "Flask",
+            "Go",
+            "Rust",
+            "Java",
+            "C++",
+            "C#",
+            "C",
+            "Assembly",
+            "Golang",
+            "Fontran"
         ];
 
         const container = document.getElementById("rolesContainer");
