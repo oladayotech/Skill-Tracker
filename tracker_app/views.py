@@ -80,6 +80,10 @@ def role_selection(request):
     return render(request, 'role_selection.html')
 
 @login_required
+def stacks(request):
+    return render(request, 'stacks.html')
+
+@login_required
 def learning_goals(request):
     return render(request, 'learning_goals.html')
 
