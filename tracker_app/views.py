@@ -2,15 +2,17 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from rest_framework import viewsets
 from .models import DailyLog
 from .serializers import DailyLogSerializer
 
-from .models import Journal
+from .models import Journal, UserGoal
 from .quote_generator import Quote_Selector
 
 import random
+import json
 from datetime import date
 
 # Create your views here.
@@ -74,6 +76,20 @@ def skills(request):
 @login_required
 def onboarding(request):
     return render(request, 'onboarding.html')
+
+def save_goal(request):
+    if request.method == POST:
+        try:
+            data = json.load(request.body)
+            goal = data.get('goal')
+            if goal and request.user.is_authenticated:
+                # update or create the UserGoal
+                obj, created = UserGoal.objects.update_or_create(
+                    user = request.user,
+                    defaults={'goal':goal}
+                )
+        except:
+            pass
 
 @login_required
 def role_selection(request):
