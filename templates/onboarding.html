@@ -141,6 +141,15 @@
       // Redirect to role-selection page
       window.location.href = "role-selection";
     }
+    fetch('/save-goal/', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-CSRFToken': '{{ csrf_token }}'
+  },
+  body: JSON.stringify({ goal: selectedGoal })
+});
+
   </script>
 </body>
 </html>
