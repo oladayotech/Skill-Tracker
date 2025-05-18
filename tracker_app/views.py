@@ -78,7 +78,7 @@ def onboarding(request):
     return render(request, 'onboarding.html')
 
 def save_goal(request):
-    if request.method == POST:
+    if request.method == 'POST':
         try:
             data = json.load(request.body)
             goal = data.get('goal')
@@ -88,8 +88,12 @@ def save_goal(request):
                     user = request.user,
                     defaults={'goal':goal}
                 )
-        except:
-            pass
+                return JsonResponse({'status':'success'})
+            else:
+                return JsonResponse({'status':'unauthorized'}, status=401)
+        except Exception as e:
+            return JsonResponse({'status':'error', 'message':str(e)}, status = 500)
+    return JsonResponse({'status': 'invalid method'}, status=405)
 
 @login_required
 def role_selection(request):

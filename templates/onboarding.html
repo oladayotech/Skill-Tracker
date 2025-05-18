@@ -57,6 +57,7 @@
 </head>
 <body>
   {% include 'navbar.html' %}
+  {% csrf_token %}
 
   <div class="header">
     <h2>Hello {{ request.user.username }}!</h2>
@@ -104,52 +105,59 @@
     <a href="https://github.com/oladayotech" class="footer-link">GitHub</a>
   </footer>
 
-  <script>
-    // Run this on page load
-    document.addEventListener("DOMContentLoaded", function () {
-      const savedGoal = localStorage.getItem("userGoal");
-      if (savedGoal) {
-        const cards = document.querySelectorAll(".goal-card");
-        cards.forEach(card => {
-          if (card.dataset.goal === savedGoal) {
-            card.classList.add("active");
-          }
-        });
-      }
-    });
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const savedGoal = localStorage.getItem("userGoal");
+    if (savedGoal) {
+      const cards = document.querySelectorAll(".goal-card");
+      cards.forEach(card => {
+        if (card.dataset.goal === savedGoal) {
+          card.classList.add("active");
+        }
+      });
+    }
+  });
 
-    function selectGoal(selectedCard) {
-      // Remove active class from all cards
-      const allCards = document.querySelectorAll('.goal-card');
-      allCards.forEach(card => card.classList.remove('active'));
+  function selectGoal(selectedCard) {
+    const allCards = document.querySelectorAll('.goal-card');
+    allCards.forEach(card => card.classList.remove('active'));
 
-      // Mark selected card active
-      selectedCard.classList.add('active');
+    selectedCard.classList.add('active');
 
-      // Save the selection in localStorage
-      const selectedGoal = selectedCard.getAttribute('data-goal');
-      localStorage.setItem('userGoal', selectedGoal);
+    const selectedGoal = selectedCard.getAttribute('data-goal');
+    localStorage.setItem('userGoal', selectedGoal);
+  }
+
+  function goToNext() {
+    const selectedGoal = localStorage.getItem('userGoal');
+    if (!selectedGoal) {
+      alert("Please select a goal before proceeding.");
+      return;
     }
 
-    function goToNext() {
-      const selectedGoal = localStorage.getItem('userGoal');
-      if (!selectedGoal) {
-        alert("Please select a goal before proceeding.");
-        return;
-      }
-
-      // Redirect to role-selection page
-      window.location.href = "role-selection";
-    }
+    // ✅ Send to Django backend via AJAX
     fetch('/save-goal/', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'X-CSRFToken': '{{ csrf_token }}'
-  },
-  body: JSON.stringify({ goal: selectedGoal })
-});
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': '{{ csrf_token }}'  // Django template injects the CSRF token here
+      },
+      body: JSON.stringify({ goal: selectedGoal })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'success') {
+        window.location.href = "role-selection";
+      } else {
+        alert("Failed to save goal.");
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      alert("Something went wrong.");
+    });
+  }
+</script>
 
-  </script>
 </body>
 </html>
