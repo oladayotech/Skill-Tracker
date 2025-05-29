@@ -6,17 +6,9 @@
   <title>Skill Tracker Onboarding</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
   <style>
-    body {
-      background-color: #f8f9fa;
-    }
-
-    .header {
-      background-color: #2b2c47;
-      color: white;
-      padding: 30px 0;
-      text-align: center;
-    }
-
+    /* Your styles — same as before */
+    body { background-color: #f8f9fa; }
+    .header { background-color: #2b2c47; color: white; padding: 30px 0; text-align: center; }
     .goal-card {
       background-color: white;
       border: 2px solid transparent;
@@ -27,37 +19,18 @@
       cursor: pointer;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     }
-
-    .goal-card:hover,
-    .goal-card.active {
+    .goal-card:hover, .goal-card.active {
       border-color: #2b2c47;
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     }
-
-    .goal-icon {
-      font-size: 36px;
-      margin-bottom: 15px;
-      color: #2b2c47;
-    }
-
-    .footer {
-      background-color: #2b2c47;
-      color: white;
-    }
-
-    .footer a {
-      color: #ccc;
-      text-decoration: none;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-    }
+    .goal-icon { font-size: 36px; margin-bottom: 15px; color: #2b2c47; }
+    .footer { background-color: #2b2c47; color: white; }
+    .footer a { color: #ccc; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
   {% include 'navbar.html' %}
-  {% csrf_token %}
 
   <div class="header">
     <h2>Hello {{ request.user.username }}!</h2>
@@ -66,34 +39,19 @@
 
   <div class="container my-5">
     <div class="row text-center g-4">
+      {% for goal, emoji in goals %}
       <div class="col-md-3">
-        <div class="goal-card" data-goal="Start my career" onclick="selectGoal(this)">
-          <div class="goal-icon">🚀</div>
-          <div>Start my career</div>
+        <div class="goal-card" data-goal="{{ goal }}" onclick="selectGoal(this)">
+          <div class="goal-icon">{{ emoji }}</div>
+          <div>{{ goal }}</div>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="goal-card" data-goal="Change my career" onclick="selectGoal(this)">
-          <div class="goal-icon">🔀</div>
-          <div>Change my career</div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="goal-card" data-goal="Grow in my current role" onclick="selectGoal(this)">
-          <div class="goal-icon">📈</div>
-          <div>Grow in my current role</div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="goal-card" data-goal="Explore topics outside of work" onclick="selectGoal(this)">
-          <div class="goal-icon">🔭</div>
-          <div>Explore topics outside of work</div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
 
     <div class="text-center mt-5">
-      <button onclick="goToNext()" class="btn btn-primary px-4 py-2" style="background-color: #2b2c47; border: none;">
+      {% csrf_token %}
+      <button class="btn btn-primary px-4 py-2" style="background-color: #2b2c47; border: none;" onclick="saveGoal()">
         Next →
       </button>
     </div>
@@ -105,59 +63,54 @@
     <a href="https://github.com/oladayotech" class="footer-link">GitHub</a>
   </footer>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const savedGoal = localStorage.getItem("userGoal");
-    if (savedGoal) {
-      const cards = document.querySelectorAll(".goal-card");
-      cards.forEach(card => {
-        if (card.dataset.goal === savedGoal) {
-          card.classList.add("active");
+  <script>
+    let selected = null;
+
+    function selectGoal(element) {
+      // Remove "active" class from all goal cards
+      document.querySelectorAll('.goal-card').forEach(card => {
+        card.classList.remove('active');
+      });
+
+      // Add "active" class to clicked one
+      element.classList.add('active');
+
+      // Save selected goal
+      selected = element.getAttribute('data-goal');
+    }
+
+    function getCSRFToken() {
+      // Get CSRF token from cookie
+      const cookie = document.cookie.split(';').find(c => c.trim().startsWith('csrftoken='));
+      return cookie ? cookie.split('=')[1] : '';
+    }
+
+    function saveGoal() {
+      if (!selected) {
+        alert("Please select a goal before continuing.");
+        return;
+      }
+
+      fetch("/save-goal/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCSRFToken()
+        },
+        body: JSON.stringify({ goal: selected })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === "success") {
+          window.location.href = "role-selection/";
+        } else {
+          alert("Failed to save goal: " + data.message);
         }
+      })
+      .catch(error => {
+        alert("Something went wrong. Try again.");
       });
     }
-  });
-
-  function selectGoal(selectedCard) {
-    const allCards = document.querySelectorAll('.goal-card');
-    allCards.forEach(card => card.classList.remove('active'));
-
-    selectedCard.classList.add('active');
-
-    const selectedGoal = selectedCard.getAttribute('data-goal');
-    localStorage.setItem('userGoal', selectedGoal);
-  }
-
-  function goToNext() {
-    const selectedGoal = localStorage.getItem('userGoal');
-    if (!selectedGoal) {
-      alert("Please select a goal before proceeding.");
-      return;
-    }
-
-    // ✅ Send to Django backend via AJAX
-    fetch('/save-goal/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': '{{ csrf_token }}'  // Django template injects the CSRF token here
-      },
-      body: JSON.stringify({ goal: selectedGoal })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.status === 'success') {
-        window.location.href = "role-selection";
-      } else {
-        alert("Failed to save goal.");
-      }
-    })
-    .catch(error => {
-      console.error("Error:", error);
-      alert("Something went wrong.");
-    });
-  }
-</script>
-
+  </script>
 </body>
 </html>

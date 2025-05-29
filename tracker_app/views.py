@@ -2,13 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.http import JsonResponse
 from rest_framework import viewsets
 from .models import DailyLog
 from .serializers import DailyLogSerializer
 
-from .models import Journal, UserGoal
+from .models import Journal, Profile
 from .quote_generator import Quote_Selector
 
 import random
@@ -75,25 +75,47 @@ def skills(request):
 
 @login_required
 def onboarding(request):
-    return render(request, 'onboarding.html')
+    goals = [
+        ("Start my career", "🚀"),
+        ("Change my career", "🔀"),
+        ("Grow in my current role", "📈"),
+        ("Explore topics outside of work", "🔭"),
+    ]
+    return render(request, 'onboarding.html', {'goals':goals})
 
+# def save_goal(request):
+#     if request.method == 'POST':
+#         try:
+#             data = json.load(request.body)
+#             goal = data.get('goal')
+#             if goal and request.user.is_authenticated:
+#                 # update or create the UserGoal
+#                 obj, created = UserGoal.objects.update_or_create(
+#                     user = request.user,
+#                     defaults={'goal':goal}
+#                 )
+#                 return JsonResponse({'status':'success'})
+#             else:
+#                 return JsonResponse({'status':'unauthorized'}, status=401)
+#         except Exception as e:
+#             return JsonResponse({'status':'error', 'message':str(e)}, status = 500)
+#     return JsonResponse({'status': 'invalid method'}, status=405)
+
+
+@csrf_exempt  # For AJAX fetch. Can replace with @csrf_protect if you're 100% sure CSRF is working
+@login_required
 def save_goal(request):
     if request.method == 'POST':
+        data = json.loads(request.body)
+        goal = data.get('goal')
+
         try:
-            data = json.load(request.body)
-            goal = data.get('goal')
-            if goal and request.user.is_authenticated:
-                # update or create the UserGoal
-                obj, created = UserGoal.objects.update_or_create(
-                    user = request.user,
-                    defaults={'goal':goal}
-                )
-                return JsonResponse({'status':'success'})
-            else:
-                return JsonResponse({'status':'unauthorized'}, status=401)
+            profile, created = Profile.objects.get_or_create(user=request.user)
+            profile.goal = goal
+            profile.save()
+            return JsonResponse({'status': 'success'})
         except Exception as e:
-            return JsonResponse({'status':'error', 'message':str(e)}, status = 500)
-    return JsonResponse({'status': 'invalid method'}, status=405)
+            return JsonResponse({'status': 'error', 'message': str(e)})
 
 @login_required
 def role_selection(request):
