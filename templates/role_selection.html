@@ -69,10 +69,15 @@
             <!-- Roles inserted here by JavaScript -->
         </div>
 
-        <div class="d-flex justify-content-between mt-4">
-            <button onclick="window.location.href='/onboarding'" class="btn btn-outline-purple">&larr; Back</button>
-            <button onclick="window.location.href='stacks'" class="btn btn-purple">Next &rarr;</button>
-        </div>
+        <form method="POST" action="{% url 'save_role' %}">
+            {% csrf_token %}
+            <input type="hidden" name="selected_role" id="selectedRoleInput">
+
+            <div class="d-flex justify-content-between mt-4">
+                <a href="{% url 'onboarding' %}" class="btn btn-outline-purple">&larr; Back</a>
+                <button type="submit" class="btn btn-purple">Next &rarr;</button>
+            </div>
+        </form>
     </div>
 
     <footer class="text-center text-white py-4 mt-5">
@@ -112,7 +117,10 @@
             card.className = "role-card";
             card.innerHTML = `<div class="icon">+</div><span>${role}</span>`;
             card.addEventListener("click", () => {
-                card.classList.toggle("selected");
+                document.querySelectorAll(".role-card").forEach(c => c.classList.remove("selected"));
+                card.classList.add("selected");
+                const roleName = card.querySelector("span").textContent;
+                document.getElementById("selectedRoleInput").value = roleName;
             });
             col.appendChild(card);
             container.appendChild(col);

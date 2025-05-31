@@ -17,6 +17,7 @@ urlpatterns = [
     path('journal/journal-details/<int:pk>/', views.journal_details, name='journal-details'),
     path('journal/', views.journal, name='journal'),
     path('save-goal/', views.save_goal, name='save-goal'),
+    path('save-role/', views.save_role, name='save_role'),
     path('<str:username>/', views.profile, name='profile'),
     # path('stacks/', views.profile, name='stacks'),
 ]

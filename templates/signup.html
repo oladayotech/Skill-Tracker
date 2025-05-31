@@ -18,13 +18,25 @@
       </ul>
     </div>
   </nav>
+  
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li class="{% if message.tags %}{{ message.tags }}{% endif %}">
+          {{ message }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 
   <main class="login-container">
     <section class="login-box">
       <h1 class="login-title">Get Started</h1>
       <p class="login-sub">Create an account</p>
       {% if error_message %}
-        <div class="error">{{ error_message }}</div>
+        <div class="error">
+          <p style="color: red;">{{ error_message }}</p>
+        </div>
       {% endif %}
       <form action="" method="post">
         {% csrf_token %}

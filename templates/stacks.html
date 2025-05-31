@@ -65,14 +65,18 @@
     <div class="container">
         <input type="text" class="form-control search-bar" placeholder="Pick your Stack" id="roleSearch">
 
-        <div class="row" id="rolesContainer">
-            <!-- Roles inserted here by JavaScript -->
-        </div>
+        <form id="selectionForm" method="POST">
+            {% csrf_token %}
+            <div class="row" id="rolesContainer"></div>
 
-        <div class="d-flex justify-content-between mt-4">
-            <button onclick="window.location.href='/onboarding/role-selection'" class="btn btn-outline-primary">&larr; Back</button>
-            <button onclick="window.location.href='learning-goals'" class="btn btn-primary">Next &rarr;</button>
-        </div>
+            <input type="hidden" name="selectedItems" id="selectedItems">
+            
+            <div class="d-flex justify-content-between mt-4">
+                <button type="button" onclick="goBack()" class="btn btn-outline-primary">&larr; Back</button>
+                <button type="submit" class="btn btn-primary">Next &rarr;</button>
+            </div>
+        </form>
+
     </div>
 
     <footer class="text-center text-white py-4 mt-5">
@@ -126,6 +130,17 @@
                 card.parentElement.style.display = role.includes(query) ? "block" : "none";
             });
         });
+
+        // Capture selected items before form submission
+        document.getElementById("selectionForm").addEventListener("submit", function (e) {
+            const selected = Array.from(document.querySelectorAll('.role-card.selected'))
+                .map(card => card.querySelector('span').textContent);
+            document.getElementById("selectedItems").value = JSON.stringify(selected);
+        });
+
+        function goBack() {
+            window.history.back();
+        }
     </script>
 </body>
 

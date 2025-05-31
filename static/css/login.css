@@ -145,5 +145,16 @@
   
   footer a:hover {
     text-decoration: underline;
-    color: #6a1b9a;
+    color: hsl(277, 70%, 35%);
+  }
+  .messages {
+    list-style: none;
+    padding: 0;
+  }
+  .success {
+    color: green;
+  }
+  .error,
+  .danger {
+    color: red;
   }

@@ -19,6 +19,16 @@
     </div>
   </nav>
 
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li class="{% if message.tags %}{{ message.tags }}{% endif %}">
+          {{ message }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
   <main class="login-container">
     <section class="login-box">
       <h1 class="login-title">Welcome Back</h1>
