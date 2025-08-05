@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.views.decorators.http import require_POST
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
@@ -7,9 +8,9 @@ from django.http import JsonResponse
 from django.contrib import messages
 
 from rest_framework import viewsets
-from .models import DailyLog
-from .serializers import DailyLogSerializer
-from .models import Journal, Profile, UserSelection
+# from .models import Goal
+# from .serializers import DailyLogSerializer
+from .models import Journal, Profile
 from .quote_generator import Quote_Selector
 
 import random
@@ -21,7 +22,23 @@ def home(request):
     # Check if the user is already authenticated
     if request.user.is_authenticated:
         return redirect('dashboard')  # Redirect to the dashboard if already logged in
-    return render(request, 'index.html')
+    # return render(request, 'index.html')
+    return render(request, 'index.html', {
+        'solutions': [
+            {'icon': 'bi-kanban-fill', 'title': 'Skill Dashboard', 'description': 'Monitor growth and milestones from a single place.'},
+            {'icon': 'bi-person-check-fill', 'title': 'Mentor Matching', 'description': 'Get paired with mentors and stay accountable.'},
+            {'icon': 'bi-calendar-check', 'title': 'Goal Planning', 'description': 'Set daily, weekly, and long-term goals to grow smarter.'},
+        ],
+        'steps': [
+            {'icon': 'bi-person-plus', 'title': '1. Create an Account', 'description': 'Sign up and set your first goal.'},
+            {'icon': 'bi-bar-chart-line', 'title': '2. Track Progress', 'description': 'Update skills and reflect on improvements.'},
+            {'icon': 'bi-stars', 'title': '3. Celebrate Wins', 'description': 'Earn badges and stay motivated as you grow.'},
+        ],
+        'faqs': [
+            {'question': 'Is SkillTracker free to use?', 'answer': 'Yes! You can get started with our free version and upgrade anytime.'},
+            {'question': 'Can I invite friends or mentors?', 'answer': 'Absolutely. You can share progress and goals with your community.'},
+        ]
+    })
 
 # def user_signup(request):
     if request.user.is_authenticated:
@@ -127,25 +144,6 @@ def onboarding(request):
     ]
     return render(request, 'onboarding.html', {'goals':goals})
 
-# def save_goal(request):
-    if request.method == 'POST':
-        try:
-            data = json.load(request.body)
-            goal = data.get('goal')
-            if goal and request.user.is_authenticated:
-                # update or create the UserGoal
-                obj, created = UserGoal.objects.update_or_create(
-                    user = request.user,
-                    defaults={'goal':goal}
-                )
-                return JsonResponse({'status':'success'})
-            else:
-                return JsonResponse({'status':'unauthorized'}, status=401)
-        except Exception as e:
-            return JsonResponse({'status':'error', 'message':str(e)}, status = 500)
-    return JsonResponse({'status': 'invalid method'}, status=405)
-
-
 @csrf_exempt  # For AJAX fetch. Can replace with @csrf_protect if you're 100% sure CSRF is working
 @login_required
 def save_goal(request):
@@ -160,15 +158,6 @@ def save_goal(request):
             return JsonResponse({'status': 'success'})
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
-
-# def role_selection(request):
-    if request.method == "POST":
-        data = json.loads(request.POST.get('selectedItems', '[]'))
-        # Save to DB for the current user
-        UserSelection.objects.create(user=request.user, selection_type="role", data=data)
-        return redirect('stacks')  # or whatever your next page URL name is
-
-    return render(request, 'role_selection.html')
 
 @login_required
 def role_selection(request):
@@ -187,13 +176,41 @@ def save_role(request):
 def stacks(request):
     if request.method == "POST":
         data = json.loads(request.POST.get('selectedItems', '[]'))
-        UserSelection.objects.create(user=request.user, selection_type="stack", data=data)
+        
+        # UserSelection.objects.filter(user=request.user).delete()
+        # UserSelection.objects.update_or_create(user=request.user, selection_type="stack", data=data)
+        
+        profile, created = Profile.objects.get_or_create(user=request.user)
+        profile.stack = data
+        profile.save()
         return redirect('learning-goals')
     return render(request, 'stacks.html')
 
 @login_required
 def learning_goals(request):
     return render(request, 'learning_goals.html')
+
+@require_POST
+@login_required
+def submit_goals(request):
+    try:
+        data = json.loads(request.body)
+        goals = data.get('goals', [])
+
+        # Optional: Clear previous goals to avoid duplicates
+        # Goal.objects.filter(user=request.user).delete()
+
+        # for goal in goals:
+        #     Goal.objects.create(user=request.user, name=goal)
+        
+        profile, created = Profile.objects.get_or_create(user=request.user)
+        profile.daily_goals = goals
+        profile.save()
+
+        return JsonResponse({"message": "Goals saved successfully"}, status=200)
+
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=400)
 
 @login_required
 def dashboard(request):
@@ -219,7 +236,16 @@ def dashboard_data(request):
 
 @login_required   
 def profile(request, username):
-    return render(request, 'profile.html')
+    profiles = Profile.objects.filter(user=request.user)
+    for profile in profiles:
+        stack = profile.stack
+        role = profile.role
+        # print(stack)
+    count = 0
+    for i in stack:
+        count += 1
+    
+    return render(request, 'profile.html', {'profile':profile, 'count':count, 'role':role})
 
 def about(request):
     return render(request, 'about.html')
@@ -246,6 +272,6 @@ def journal_details(request, pk):
     else:
         return redirect('journal')
     
-class DailyLogViewSet(viewsets.ModelViewSet):
-    queryset = DailyLog.objects.all()
-    serializer_class = DailyLogSerializer
+# class DailyLogViewSet(viewsets.ModelViewSet):
+#     queryset = DailyLog.objects.all()
+#     serializer_class = DailyLogSerializer

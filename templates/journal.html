@@ -80,7 +80,7 @@
     }
 
     .footer a {
-      color: #6a0dad;
+      color: #0d6efd;
       text-decoration: none;
       margin-left: 10px;
     }
@@ -125,7 +125,7 @@
         {% if journal.journal_image %}
           <img src="{{ journal.journal_image.url }}" alt="Journal image">
         {% else %}
-          <img src="{% static 'images/20241022_143310.jpg' %}" alt="Default image">
+          <img src="{% static 'images/download.png' %}" alt="Default image">
         {% endif %}
         <div>
           <p class="fw-semibold text-dark">{{ journal.created_at|date:"F j, Y, g:i a" }}</p>
@@ -142,7 +142,7 @@
 
   <!-- Footer -->
   <footer class="text-center py-4 footer">
-    &copy; 2025 Built with 💜 by Abdulquahaar |
+    &copy; 2025 Built with 💙 by Abdulquahaar |
     <a href="#">Privacy</a> |
     <a href="https://github.com/oladayotech" target="_blank">Contact</a>
   </footer>

@@ -114,11 +114,11 @@
           {% else %}
           <h5 class="mb-1">{{ request.user.username }}</h5>
           {% endif %}
-          <p class="text-muted">Full Stack Developer</p>
+          <p class="text-muted">{{ role }}</p>
 
           <div class="d-flex justify-content-around my-4">
             <div class="stat-box">
-              <h6 class="mb-0">6</h6>
+              <h6 class="mb-0">{{ count }}</h6>
               <small>Skills</small>
             </div>
             <div class="stat-box">
@@ -140,11 +140,22 @@
         <div class="card p-4 mb-4 card-custom">
           <div class="section-header">Skills</div>
           <div class="d-flex flex-wrap gap-2">
-            <span class="badge-skill">Python</span>
-            <span class="badge-skill">Django</span>
-            <span class="badge-skill">HTML</span>
-            <span class="badge-skill">CSS</span>
-            <span class="badge-skill">JavaScript</span>
+            
+            {% if profile %}
+              {% for stack in profile.stack %}
+                <span class="badge-skill">{{ stack }}</span>
+              {% endfor %}
+            {% else %}
+              <span class="badge-skill">No stack yet</span>
+            {% endif %}
+              
+            
+
+            <!-- <span class="badge-skill">Python</span> -->
+            <!-- <span class="badge-skill">Django</span> -->
+            <!-- <span class="badge-skill">HTML</span> -->
+            <!-- <span class="badge-skill">CSS</span> -->
+            <!-- <span class="badge-skill">JavaScript</span> -->
           </div>
         </div>
 

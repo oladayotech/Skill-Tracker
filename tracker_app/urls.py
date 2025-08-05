@@ -18,6 +18,7 @@ urlpatterns = [
     path('journal/', views.journal, name='journal'),
     path('save-goal/', views.save_goal, name='save-goal'),
     path('save-role/', views.save_role, name='save_role'),
-    path('<str:username>/', views.profile, name='profile'),
     # path('stacks/', views.profile, name='stacks'),
+    path('submit-goals/', views.submit_goals, name='submit-goals'),
+    path('<str:username>/', views.profile, name='profile'),
 ]

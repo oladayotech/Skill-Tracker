@@ -13,8 +13,10 @@
     :root {
       --bg-light: #ffffff;
       --text-light: #000000;
-      --bg-dark: #1e1f3d;
-      --text-dark: #dcd0ff;
+      --bg-dark: #0f2c50;
+      --text-dark: #e0ecff;
+      --primary-blue: #1a73e8;
+      --hover-blue: #4285f4;
     }
 
     body {
@@ -28,41 +30,41 @@
       color: var(--text-dark);
     }
 
-    .bg-dark-purple {
+    .bg-dark-blue {
       background-color: var(--bg-dark);
     }
 
-    .text-light-purple {
+    .text-light-blue {
       color: var(--text-dark) !important;
     }
 
-    .text-light-purple:hover {
+    .text-light-blue:hover {
       color: #ffffff !important;
     }
 
-    .btn-purple {
-      background-color: #6f48b1;
+    .text-light-blue i {
+      color: var(--primary-blue) !important;
+    }
+
+    .btn-blue {
+      background-color: var(--primary-blue);
       color: #fff;
       border: none;
     }
 
-    .btn-purple:hover {
-      background-color: #7f5dc9;
+    .btn-blue:hover {
+      background-color: var(--hover-blue);
     }
 
-    .btn-outline-purple {
-      border: 1px solid #b388ff;
-      color: #b388ff;
+    .btn-outline-blue {
+      border: 1px solid var(--primary-blue);
+      color: var(--primary-blue);
       background-color: transparent;
     }
 
-    .btn-outline-purple:hover {
-      background-color: #b388ff;
-      color: #1e1f3d;
-    }
-
-    .text-light-purple i {
-      color: #b388ff !important;
+    .btn-outline-blue:hover {
+      background-color: var(--primary-blue);
+      color: #fff;
     }
 
     .navbar-toggler {
@@ -82,10 +84,10 @@
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-dark-purple shadow-sm">
+<nav class="navbar navbar-expand-lg bg-dark-blue shadow-sm">
   <div class="container">
-    <a class="navbar-brand fw-bold d-flex align-items-center gap-2 text-light-purple" href="{% url 'dashboard' %}">
-      <i class="bi bi-graph-up-arrow text-purple" style="font-size: 1.5rem;"></i>
+    <a class="navbar-brand fw-bold d-flex align-items-center gap-2 text-light-blue" href="{% url 'dashboard' %}">
+      <i class="bi bi-graph-up-arrow" style="font-size: 1.5rem;"></i>
       <span class="ms-2">SkillTracker.</span>
     </a>
 
@@ -95,17 +97,17 @@
 
     <div class="collapse navbar-collapse" id="navItems">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item mx-2"><a class="nav-link text-light-purple" href="{% url 'dashboard' %}">Home</a></li>
-        <li class="nav-item mx-2"><a class="nav-link text-light-purple" href="{% url 'skills' %}">Skills</a></li>
-        <li class="nav-item mx-2"><a class="nav-link text-light-purple" href="{% url 'journal' %}">Journal</a></li>
-        <li class="nav-item mx-2"><a class="nav-link text-light-purple" href="{% url 'about' %}">About</a></li>
+        <li class="nav-item mx-2"><a class="nav-link text-light-blue" href="{% url 'dashboard' %}">Home</a></li>
+        <li class="nav-item mx-2"><a class="nav-link text-light-blue" href="{% url 'skills' %}">Skills</a></li>
+        <li class="nav-item mx-2"><a class="nav-link text-light-blue" href="{% url 'journal' %}">Journal</a></li>
+        <li class="nav-item mx-2"><a class="nav-link text-light-blue" href="{% url 'about' %}">About</a></li>
       </ul>
       <div class="d-flex align-items-center gap-2">
         <button class="btn btn-outline-light" id="themeToggle" title="Toggle dark/light mode">
           <i class="bi bi-moon-fill"></i>
         </button>
-        <a href="/{{ request.user.username }}" class="btn btn-outline-purple">My Profile</a>
-        <a href="{% url 'logout' %}" data-bs-toggle="modal" data-bs-target="#logoutModal" class="btn btn-purple">Logout</a>
+        <a href="/{{ request.user.username }}" class="btn btn-outline-blue">My Profile</a>
+        <a href="{% url 'logout' %}" data-bs-toggle="modal" data-bs-target="#logoutModal" class="btn btn-blue">Logout</a>
       </div>
     </div>
   </div>
@@ -115,25 +117,18 @@
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-0 shadow-lg">
-
-      <!-- Modal Header -->
-      <div class="modal-header" style="background-color: #2b2c47;">
+      <div class="modal-header" style="background-color: #163b60;">
         <h5 class="modal-title text-white" id="logoutModalLabel">Confirm Logout</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-
-      <!-- Modal Body -->
       <div class="modal-body text-center" style="background-color: #f8f9fa;">
         <p class="fs-5 mb-0">Are you sure you want to log out?</p>
         <small class="text-muted">You will be redirected to the home page.</small>
       </div>
-
-      <!-- Modal Footer -->
       <div class="modal-footer justify-content-center" style="background-color: #f8f9fa;">
         <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Cancel</button>
         <a href="{% url 'logout' %}" class="btn btn-danger px-4">Yes, Logout</a>
       </div>
-
     </div>
   </div>
 </div>

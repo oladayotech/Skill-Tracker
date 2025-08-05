@@ -4,6 +4,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pick a Goal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .goal-card {
+            border: 2px solid #ccc;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9f9f9;
+            cursor: default;
+            transition: background-color 0.3s;
+        }
+
+        .goal-card:hover {
+            background-color: #eef5ff;
+        }
+
+        .add-goal, .remove-goal {
+            font-size: 22px;
+            color: #0d6efd;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .goal-input-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .goal-input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .btn-primary {
+            background-color: #0d6efd;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+        }
+    </style>
+</head>
+<body>
+
+    {% include 'navbar.html' %}
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Pick a Goal</h2>
+
+        <!-- Input field for the goal -->
+        <div class="goal-input-container">
+            <input type="text" class="goal-input" placeholder="Enter a goal..." id="goalInput">
+            <span class="add-goal" onclick="addGoal()">+</span>
+        </div>
+
+        <!-- Display goals -->
+        <div id="goalList"></div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <button onclick="window.location.href='/'" class="btn btn-outline-primary">&larr; Back</button>
+            <button onclick="submitGoals()" class="btn btn-primary">Submit Goals</button>
+        </div>
+    </div>
+
+    <!-- CSRF token script for JavaScript -->
+    <script>
+        // Get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+
+        function addGoal() {
+            const goalInput = document.getElementById('goalInput');
+            const goalText = goalInput.value.trim();
+            if (goalText) {
+                const goalList = document.getElementById('goalList');
+
+                const newGoalCard = document.createElement('div');
+                newGoalCard.classList.add('goal-card');
+                newGoalCard.innerHTML = `
+                    <span>${goalText}</span>
+                    <span class="remove-goal" onclick="removeGoal(this)">−</span>
+                `;
+
+                goalList.appendChild(newGoalCard);
+                goalInput.value = '';
+            } else {
+                alert("Please enter a valid goal!");
+            }
+        }
+
+        function removeGoal(element) {
+            element.parentElement.remove();
+        }
+
+        function submitGoals() {
+            const cards = document.querySelectorAll("#goalList .goal-card span:first-child");
+            const goals = [...cards].map(card => card.textContent.trim());
+
+            if (goals.length === 0) {
+                alert("Please add at least one goal before submitting.");
+                return;
+            }
+
+            fetch('/submit-goals/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({ goals })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Goals submitted successfully!");
+                    window.location.href = '/dashboard';  // or next onboarding step
+                } else {
+                    return response.json().then(data => {
+                        throw new Error(data.error || "Unknown error");
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Submission error:", error);
+                alert("Error: " + error.message);
+            });
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
@@ -23,11 +203,10 @@
             text-decoration: underline;
         }
     </style>
-    {% include 'navbar.html' %}
     <section>
-        <div>
+        <div> -->
             <!-- <h5>What did you leaern today?</h5> -->
-            <div class="">
+            <!-- <div class="">
                 <label for="">What did you leaern today?</label>
                 <input placeholder="Learned about Django models" type="text">
                 <div>
@@ -81,4 +260,4 @@
         <a href="https://github.com/oladayotech" class="footer-link text-white">GitHub</a>
     </footer>
 </body>
-</html>
+</html> -->
