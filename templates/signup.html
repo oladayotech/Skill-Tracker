@@ -191,7 +191,7 @@
           <p style="color: red;">{{ error_message }}</p>
         </div>
       {% endif %}
-      <form action="" method="post">
+      <form action=""  method="post">
         {% csrf_token %}
         <label for="username">Username</label>
         <input type="text" name="username" id="username" placeholder="e.g. johndoe" required>
