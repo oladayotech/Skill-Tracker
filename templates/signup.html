@@ -22,6 +22,14 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      background-color: #eaf3ff;
+      background-image: 
+        linear-gradient(135deg, rgba(255,255,255,0.5) 25%, transparent 25%),
+        linear-gradient(225deg, rgba(255,255,255,0.5) 25%, transparent 25%),
+        linear-gradient(45deg, rgba(255,255,255,0.5) 25%, transparent 25%),
+        linear-gradient(315deg, rgba(255,255,255,0.5) 25%, #eaf3ff 25%);
+      background-size: 40px 40px;
+      background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
     }
     .text-blue { color: #0d6efd !important; }
     .btn-blue {
@@ -151,26 +159,40 @@
       color: red;
     }
   </style>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg bg-white shadow-sm">
-    <div class="container">
-      <a class="navbar-brand fw-bold text-blue" href="#">SkillTracker.</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navItems">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navItems">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item mx-2"><a class="nav-link text-blue" href="#solutions">Solutions</a></li>
-          <li class="nav-item mx-2"><a class="nav-link text-blue" href="#how-it-works">How it works</a></li>
-          <li class="nav-item mx-2"><a class="nav-link text-blue" href="#faqs">FAQs</a></li>
-        </ul>
-        <div class="d-flex">
-          <a href="{% url 'login' %}" class="btn btn-blue me-2">Login</a>
-          <a href="{% url 'signup' %}" class="btn btn-blue">Get Started</a>
-        </div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-light-blue shadow-sm" style="background-color: #eaf3ff;">
+  <div class="container-fluid px-5">
+    <!-- Brand slightly to the left -->
+    <a class="navbar-brand fw-bold text-blue me-5" href="#">SkillTracker.</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navItems">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="navItems">
+      <!-- Centered nav links -->
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item mx-2"><a class="nav-link text-blue" href="#our-solutions">Solutions</a></li>
+        <li class="nav-item mx-2"><a class="nav-link text-blue" href="#how-it-works">How it works</a></li>
+        <li class="nav-item mx-2"><a class="nav-link text-blue" href="#faqs">FAQs</a></li>
+        <li class="nav-item mx-2"><a class="nav-link text-blue" href="about">About Us</a></li>
+      </ul>
+
+      <!-- Mobile buttons (visible only on small screens) -->
+      <div class="d-lg-none mt-3">
+        <a href="{% url 'login' %}" class="btn btn-blue me-2 mb-2">Login</a>
+        <a href="{% url 'signup' %}" class="btn btn-blue mb-2">Get Started</a>
       </div>
     </div>
-  </nav>
+
+    <!-- Desktop buttons -->
+    <div class="d-none d-lg-flex ms-auto">
+      <a href="{% url 'login' %}" class="btn btn-blue me-2">Login</a>
+      <a href="{% url 'signup' %}" class="btn btn-blue">Get Started</a>
+    </div>
+  </div>
+</nav>
   
   {% if messages %}
     <ul class="messages">
@@ -211,13 +233,13 @@
         </p>
       </form>
     </section>
-    <section class="login-illustration">
+    <section class="login-illustration d-none d-md-block">
       <img src="{% static 'images\Mobile login-rafiki.png' %}" alt="Illustration" />
     </section>
   </main>
 
   <footer class="footer">
-    &copy; 2025 SkillTracker — Built by Abdulquahaar 💙 |
+    &copy; 2025 SkillTracker — Built by Oladayo 💙 |
     <a href="https://github.com/oladayotech">Contact</a>
   </footer>
   <!-- Bootstrap JS -->
