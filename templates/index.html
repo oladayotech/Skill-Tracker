@@ -168,11 +168,12 @@
       .timeline {
         flex-direction: column;
         align-items: flex-start;
+        /* justify-content: center; */
       }
 
       .timeline::before {
         top: 0;
-        left: 9%;
+        left: 8%;
         height: 80%;
         width: 3px;
         background: linear-gradient(to bottom, #0d6efd 0%, #0d6efd 50%, #0dcaf0 50%, #0dcaf0 100%);
@@ -182,10 +183,11 @@
       .timeline-step {
         max-width: none;
         width: 100%;
-        margin-left: 9%;
-        padding-left: 2.5rem;
+        margin-left: 8%;
+        padding-left: 2rem;
         text-align: left;
         position: relative;
+        margin-bottom: -30px;
       }
 
       .timeline-icon {
@@ -414,7 +416,7 @@
     <p class="text-blue-50 mb-5">From sign-up to success — follow the steps.</p>
 
     <div class="timeline d-flex flex-column flex-md-row justify-content-between align-items-center">
-      <div class="timeline-step text-center mb-0 mb-md-0">
+      <div class="timeline-step text-center mb-md-0">
         <div class="timeline-icon bg-primary mb-3 mx-auto">
           <i class="bi bi-person-plus text-white"></i>
         </div>
@@ -422,7 +424,7 @@
         <p class="text-muted">Sign up and set your first goal to get started.</p>
       </div>
 
-      <div class="timeline-step text-center mb-0 mb-md-0">
+      <div class="timeline-step text-center mb-md-0">
         <div class="timeline-icon bg-info mb-3 mx-auto">
           <i class="bi bi-bar-chart-line text-white"></i>
         </div>
@@ -430,7 +432,7 @@
         <p class="text-muted">Update skills and monitor your journey visually.</p>
       </div>
 
-      <div class="timeline-step text-center mb-0 mb-md-0">
+      <div class="timeline-step text-center mb-md-0">
         <div class="timeline-icon bg-success mb-3 mx-auto">
           <i class="bi bi-stars text-white"></i>
         </div>
