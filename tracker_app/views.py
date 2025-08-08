@@ -26,7 +26,7 @@ def home(request):
     return render(request, 'index.html', {
         'solutions': [
             {'icon': 'bi-kanban-fill', 'title': 'Skill Dashboard', 'description': 'Monitor growth and milestones from a single place.'},
-            {'icon': 'bi-person-check-fill', 'title': 'Mentor Matching', 'description': 'Get paired with mentors and stay accountable.'},
+            {'icon': 'bi-journals', 'title': 'Mentor Matching', 'description': 'Get paired with mentors and stay accountable.'},
             {'icon': 'bi-calendar-check', 'title': 'Goal Planning', 'description': 'Set daily, weekly, and long-term goals to grow smarter.'},
         ],
         'steps': [

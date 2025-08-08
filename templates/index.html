@@ -39,7 +39,19 @@
       color: white;
     }
 
-    .hero-section { background-color: #eaf3ff; }
+    /* .hero-section { background-color: #eaf3ff; } */
+
+    .hero-section {
+  background-color: #eaf3ff;
+  background-image: 
+    linear-gradient(135deg, rgba(255,255,255,0.5) 25%, transparent 25%),
+    linear-gradient(225deg, rgba(255,255,255,0.5) 25%, transparent 25%),
+    linear-gradient(45deg, rgba(255,255,255,0.5) 25%, transparent 25%),
+    linear-gradient(315deg, rgba(255,255,255,0.5) 25%, #eaf3ff 25%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+}
+
 
     .icon-card {
       background: white;
@@ -52,6 +64,134 @@
     .icon-card i {
       font-size: 4rem;
       color: #0d6efd;
+    }
+
+    #solutions input[disabled] {
+  background-color: #f8f9fa;
+  border-color: #ced4da;
+  color: #6c757d;
+}
+
+    #solutions .btn-blue {
+      background-color: #0d6efd !important;
+      border: none;
+      color: white !important;
+      box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3);
+    }
+
+    #solutions .btn-blue:hover {
+      background-color: #0b5ed7 !important;
+    }
+
+    @media (min-width: 992px) {
+      #solutions {
+        max-width: 85% !important;
+      }
+    }
+
+    /* Our Solutions - Modern Card Style */
+.solution-card {
+  background: #fff;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.solution-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.solution-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+  #our-solution {
+    padding: 40px 15px;
+  }
+  .solution-card {
+    padding: 2rem 1.5rem;
+  }
+}
+
+
+    .timeline {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 3rem;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 30px; /* aligns with center of icons/h6 */
+      left: 8%;
+      right: 8%;
+      height: 4px;
+      background: linear-gradient(to right, #0d6efd 0%, #0d6efd 50%, #0dcaf0 50%, #0dcaf0 100%);
+      z-index: 0;
+    }
+
+    .timeline-step {
+      position: relative;
+      z-index: 1;
+      flex: 1 1 30%;
+      max-width: 250px;
+      text-align: center;
+    }
+
+    .timeline-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      margin: 0 auto 0.5rem auto;
+    }
+
+    @media (max-width: 767px) {
+      .timeline {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .timeline::before {
+        top: 0;
+        left: 0%;
+        height: 80%;
+        width: 4px;
+        background: linear-gradient(to bottom, #0d6efd 0%, #0d6efd 50%, #0dcaf0 50%, #0dcaf0 100%);
+        transform: translateX(-50%);
+      }
+
+      .timeline-step {
+        max-width: none;
+        width: 100%;
+        padding-left: 2.5rem;
+        text-align: left;
+        position: relative;
+      }
+
+      .timeline-icon {
+        position: absolute;
+        left: -30px;
+        top: 0;
+      }
     }
 
     .footer {
@@ -92,8 +232,7 @@
 
 <body class="custom-body">
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+  <!-- <nav class="navbar navbar-expand-lg bg-white shadow-sm">
     <div class="container">
       <a class="navbar-brand fw-bold text-blue" href="#">SkillTracker.</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navItems">
@@ -111,7 +250,41 @@
         </div>
       </div>
     </div>
-  </nav>
+  </nav> -->
+
+  <!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-light-blue shadow-sm" style="background-color: #eaf3ff;">
+  <div class="container-fluid px-5">
+    <!-- Brand slightly to the left -->
+    <a class="navbar-brand fw-bold text-blue me-5" href="#">SkillTracker.</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navItems">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="navItems">
+      <!-- Centered nav links -->
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item mx-2"><a class="nav-link text-blue" href="#our-solutions">Solutions</a></li>
+        <li class="nav-item mx-2"><a class="nav-link text-blue" href="#how-it-works">How it works</a></li>
+        <li class="nav-item mx-2"><a class="nav-link text-blue" href="#faqs">FAQs</a></li>
+        <li class="nav-item mx-2"><a class="nav-link text-blue" href="about">About Us</a></li>
+      </ul>
+
+      <!-- Mobile buttons (visible only on small screens) -->
+      <div class="d-lg-none mt-3">
+        <a href="{% url 'login' %}" class="btn btn-blue me-2 mb-2">Login</a>
+        <a href="{% url 'signup' %}" class="btn btn-blue mb-2">Get Started</a>
+      </div>
+    </div>
+
+    <!-- Desktop buttons -->
+    <div class="d-none d-lg-flex ms-auto">
+      <a href="{% url 'login' %}" class="btn btn-blue me-2">Login</a>
+      <a href="{% url 'signup' %}" class="btn btn-blue">Get Started</a>
+    </div>
+  </div>
+</nav>
 
   <!-- Hero Section -->
   <section class="hero-section py-5 flex-grow-1">
@@ -127,7 +300,7 @@
           </p>
           <div>
             <a href="{% url 'signup' %}" class="btn btn-blue btn-lg me-3">Get Started</a>
-            <a href="#solutions" class="btn btn-outline-blue btn-lg">Our Solutions</a>
+            <a href="#our-solution" class="btn btn-outline-blue btn-lg">Our Solutions</a>
           </div>
         </div>
         <div class="col-lg-5 text-center">
@@ -140,38 +313,132 @@
   </section>
 
   <!-- Solutions Section -->
-  <section id="solutions">
-    <div class="container text-center">
-      <h2 class="section-title">Our Solutions</h2>
-      <p class="text-muted mb-4">We provide tools to help you visualize your progress, set goals, and improve effectively.</p>
-      <div class="row">
-        {% for item in solutions %}
-        <div class="col-md-4 mb-4">
-          <i class="bi {{ item.icon }} text-blue" style="font-size: 2.5rem;"></i>
-          <h5 class="mt-3">{{ item.title }}</h5>
-          <p class="text-muted">{{ item.description }}</p>
+<section id="solutions-wrapper" class="py-5 d-flex justify-content-center">
+  <div id="solutions" class="text-white py-5 px-3 w-100" style="background-color: #0b0f19; border-radius: 1rem; max-width: 90%;">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- Text + CTA -->
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <small class="text-uppercase text-info fw-bold">SkillTracker Spotlight</small>
+          <h2 class="display-6 fw-bold mt-2 mb-3">Streamline Your Skill Journey</h2>
+          <p class="text-white-50 fs-5">
+            Automate your learning path and track goals seamlessly — no complexity, just results.
+          </p>
+          <a href="{% url 'signup' %}" class="btn btn-blue btn-lg mt-3">Explore the platform</a>
         </div>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
 
-  <!-- How It Works Section -->
-  <section id="how-it-works" class="bg-light">
-    <div class="container text-center">
-      <h2 class="section-title">How It Works</h2>
-      <p class="text-muted mb-4">Start tracking your skills in 3 simple steps.</p>
-      <div class="row">
-        {% for step in steps %}
-        <div class="col-md-4 mb-4">
-          <i class="bi {{ step.icon }} text-blue" style="font-size: 2rem;"></i>
-          <h6 class="mt-2">{{ step.title }}</h6>
-          <p class="text-muted">{{ step.description }}</p>
+        <!-- UI Preview/Mockup -->
+        <div class="col-lg-6">
+          <div class="bg-white rounded-4 shadow p-4 position-relative">
+            <div class="d-flex justify-content-between mb-3">
+              <span class="badge bg-light text-dark">Tracker</span>
+              <span class="badge bg-info text-white">AI Assist</span>
+            </div>
+            <h5 class="text-dark">Hello, Doe! 👋</h5>
+            <p class="text-muted">What skill do you want to focus on today?</p>
+            <input type="text" class="form-control" placeholder="e.g., Improve coding, learn Django..." disabled>
+
+            <!-- Avatar Options -->
+            <div class="d-flex justify-content-start gap-3 mt-4">
+              <div class="text-center">
+                <img src="{% static 'img/goal-icon.png' %}" class="rounded-circle border border-info" width="50" />
+                <small class="d-block text-muted mt-1">Goals</small>
+              </div>
+              <div class="text-center">
+                <img src="{% static 'img/skill-icon.png' %}" class="rounded-circle border border-info" width="50" />
+                <small class="d-block text-muted mt-1">Skills</small>
+              </div>
+              <div class="text-center">
+                <img src="{% static 'img/stats-icon.png' %}" class="rounded-circle border border-info" width="50" />
+                <small class="d-block text-muted mt-1">Stats</small>
+              </div>
+            </div>
+          </div>
         </div>
-        {% endfor %}
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+  <!-- Our-Solutions Section -->
+<section id="our-solution" class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Our Solutions</h2>
+      <p class="text-muted">We provide tools to help you visualize your progress, set goals, and improve effectively.</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Card 1 -->
+      <div class="col-md-4">
+        <div class="solution-card h-100 text-center p-4 shadow-sm">
+          <div class="solution-icon bg-primary text-white mb-3">
+            <i class="bi bi-kanban-fill"></i>
+          </div>
+          <h5 class="fw-bold">Skill Dashboard</h5>
+          <p class="text-muted">Monitor growth and milestones from a single place.</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-md-4">
+        <div class="solution-card h-100 text-center p-4 shadow-sm">
+          <div class="solution-icon bg-info text-white mb-3">
+            <i class="bi bi-journals"></i>
+          </div>
+          <h5 class="fw-bold">Journal</h5>
+          <p class="text-muted">Record your learning experiences and insights effortlessly.</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-md-4">
+        <div class="solution-card h-100 text-center p-4 shadow-sm">
+          <div class="solution-icon bg-success text-white mb-3">
+            <i class="bi bi-calendar-check"></i>
+          </div>
+          <h5 class="fw-bold">Goal Planning</h5>
+          <p class="text-muted">Set daily, weekly, and long-term goals to grow smarter.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  
+  <!-- How It Works - Timeline Inspired -->
+<section id="how-it-works" class="py-5">
+  <div class="container text-center">
+    <h2 class="section-title text-blue">How It Works</h2>
+    <p class="text-blue-50 mb-5">From sign-up to success — follow the steps.</p>
+
+    <div class="timeline d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <div class="timeline-step text-center mb-5 mb-md-0">
+        <div class="timeline-icon bg-primary mb-3 mx-auto">
+          <i class="bi bi-person-plus text-white"></i>
+        </div>
+        <h5 class="fw-bold">Create Account</h5>
+        <p class="text-muted">Sign up and set your first goal to get started.</p>
+      </div>
+
+      <div class="timeline-step text-center mb-5 mb-md-0">
+        <div class="timeline-icon bg-info mb-3 mx-auto">
+          <i class="bi bi-bar-chart-line text-white"></i>
+        </div>
+        <h5 class="fw-bold">Track Progress</h5>
+        <p class="text-muted">Update skills and monitor your journey visually.</p>
+      </div>
+
+      <div class="timeline-step text-center mb-5 mb-md-0">
+        <div class="timeline-icon bg-success mb-3 mx-auto">
+          <i class="bi bi-stars text-white"></i>
+        </div>
+        <h5 class="fw-bold">Celebrate Wins</h5>
+        <p class="text-muted">Earn achievements and share your success.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- FAQs Section -->
   <section id="faqs">
@@ -200,7 +467,7 @@
 
   <!-- Footer -->
   <footer class="footer text-center py-3">
-    &copy; 2025 Built with 💙 by Abdulquahaar |
+    &copy; 2025 Built with 💙 by Oladayo |
     <a href="#">Privacy</a> |
     <a href="https://github.com/oladayotech">GitHub</a>
   </footer>
